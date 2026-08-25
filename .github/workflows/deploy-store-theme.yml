@@ -44,7 +44,9 @@ jobs:
 
   deploy:
     name: Backup and deploy over FTPS
-    if: github.event_name == 'workflow_dispatch' && inputs.confirmation == 'DEPLOY'
+    if: >-
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_dispatch' && inputs.confirmation == 'DEPLOY')
     needs: validate
     runs-on: ubuntu-24.04
     timeout-minutes: 20
