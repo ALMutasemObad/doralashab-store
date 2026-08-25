@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": { "contentSize": "800px", "wideSize": "1180px" },
+    "color": {
+      "palette": [
+        { "slug": "green", "name": "أخضر دور الأصحاب", "color": "#0e6b4a" },
+        { "slug": "dark-green", "name": "أخضر داكن", "color": "#084d36" },
+        { "slug": "lime", "name": "ليموني فاتح", "color": "#faffc5" },
+        { "slug": "paper", "name": "ورقي", "color": "#fbfaf6" }
+      ]
+    },
+    "typography": { "fontFamilies": [{ "fontFamily": "Cairo, Segoe UI, Tahoma, Arial, sans-serif", "name": "Cairo", "slug": "cairo" }] }
+  },
+  "styles": { "typography": { "fontFamily": "var:preset|font-family|cairo" }, "color": { "text": "#173b2b", "background": "#fbfaf6" } }
+}

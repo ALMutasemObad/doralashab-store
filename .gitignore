@@ -1,0 +1,16 @@
+# Generated deployment bundles and temporary migration files.
+dist/
+tmp/
+*.zip
+*.tar.gz
+
+# Local credentials and machine-specific files must never enter Git.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.log
+Thumbs.db
+.DS_Store

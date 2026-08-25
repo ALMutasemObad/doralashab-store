@@ -1,0 +1,142 @@
+name: Validate and deploy store theme
+
+on:
+  pull_request:
+    paths:
+      - "doralashab-store/wp-content/themes/doralashab/**"
+      - "scripts/validate-theme.sh"
+      - ".github/workflows/deploy-store-theme.yml"
+  push:
+    branches: [main]
+    paths:
+      - "doralashab-store/wp-content/themes/doralashab/**"
+      - "scripts/validate-theme.sh"
+      - ".github/workflows/deploy-store-theme.yml"
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: "اكتب DEPLOY لتأكيد نشر قالب الإنتاج"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: doralashab-production-theme
+  cancel-in-progress: false
+
+env:
+  THEME_DIR: doralashab-store/wp-content/themes/doralashab
+  SITE_URL: https://shop.doralashab.com
+
+jobs:
+  validate:
+    name: Validate theme
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out the exact revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Validate files and PHP syntax
+        run: bash scripts/validate-theme.sh
+
+  deploy:
+    name: Backup and deploy over FTPS
+    if: github.event_name == 'workflow_dispatch' && inputs.confirmation == 'DEPLOY'
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment:
+      name: production
+      url: https://shop.doralashab.com
+    steps:
+      - name: Check out the validated revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Revalidate before deployment
+        run: bash scripts/validate-theme.sh
+
+      - name: Install FTPS client from Ubuntu repositories
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends lftp
+
+      - name: Back up the current remote theme
+        env:
+          FTPS_HOST: ${{ secrets.DORALASHAB_FTPS_HOST }}
+          FTPS_PORT: ${{ secrets.DORALASHAB_FTPS_PORT }}
+          FTPS_USER: ${{ secrets.DORALASHAB_FTPS_USER }}
+          FTPS_PASSWORD: ${{ secrets.DORALASHAB_FTPS_PASSWORD }}
+        run: |
+          set -euo pipefail
+          : "${FTPS_HOST:?Missing DORALASHAB_FTPS_HOST}"
+          : "${FTPS_USER:?Missing DORALASHAB_FTPS_USER}"
+          : "${FTPS_PASSWORD:?Missing DORALASHAB_FTPS_PASSWORD}"
+          FTPS_PORT="${FTPS_PORT:-21}"
+          backup_dir="$RUNNER_TEMP/remote-backup"
+          command_file="$RUNNER_TEMP/lftp-backup.rc"
+          mkdir -p "$backup_dir/theme"
+          trap 'rm -f "$command_file"' EXIT
+          umask 077
+          cat >"$command_file" <<LFTP
+          set cmd:fail-exit true
+          set net:max-retries 2
+          set net:timeout 20
+          set ssl:verify-certificate true
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          open -p "$FTPS_PORT" "ftp://$FTPS_HOST"
+          user "$FTPS_USER" "$FTPS_PASSWORD"
+          cls -1 /.doralashab-theme-root
+          mirror --parallel=2 --verbose=1 / $backup_dir/theme
+          bye
+          LFTP
+          lftp -f "$command_file"
+          tar -czf "$RUNNER_TEMP/theme-before-${GITHUB_SHA}.tar.gz" -C "$backup_dir" theme
+
+      - name: Retain the pre-deploy backup for 14 days
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: theme-before-${{ github.sha }}
+          path: ${{ runner.temp }}/theme-before-${{ github.sha }}.tar.gz
+          retention-days: 14
+          if-no-files-found: error
+
+      - name: Deploy only the theme directory
+        env:
+          FTPS_HOST: ${{ secrets.DORALASHAB_FTPS_HOST }}
+          FTPS_PORT: ${{ secrets.DORALASHAB_FTPS_PORT }}
+          FTPS_USER: ${{ secrets.DORALASHAB_FTPS_USER }}
+          FTPS_PASSWORD: ${{ secrets.DORALASHAB_FTPS_PASSWORD }}
+        run: |
+          set -euo pipefail
+          : "${FTPS_HOST:?Missing DORALASHAB_FTPS_HOST}"
+          : "${FTPS_USER:?Missing DORALASHAB_FTPS_USER}"
+          : "${FTPS_PASSWORD:?Missing DORALASHAB_FTPS_PASSWORD}"
+          FTPS_PORT="${FTPS_PORT:-21}"
+          command_file="$RUNNER_TEMP/lftp-deploy.rc"
+          trap 'rm -f "$command_file"' EXIT
+          umask 077
+          cat >"$command_file" <<LFTP
+          set cmd:fail-exit true
+          set net:max-retries 2
+          set net:timeout 20
+          set ssl:verify-certificate true
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          open -p "$FTPS_PORT" "ftp://$FTPS_HOST"
+          user "$FTPS_USER" "$FTPS_PASSWORD"
+          cls -1 /.doralashab-theme-root
+          mirror --reverse --delete --parallel=2 --verbose=1 $THEME_DIR/ /
+          bye
+          LFTP
+          lftp -f "$command_file"
+
+      - name: Verify the public site and deployed assets
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location --retry 3 "$SITE_URL/?deployed=${GITHUB_SHA}" | grep -F "شركة دور الأصحاب للنشر والتوزيع" >/dev/null
+          curl --fail --silent --show-error --head --retry 3 "$SITE_URL/wp-content/themes/doralashab/assets/css/v2.css?v=${GITHUB_SHA}" >/dev/null
+          curl --fail --silent --show-error --head --retry 3 "$SITE_URL/wp-content/themes/doralashab/assets/images/favicon.svg?v=${GITHUB_SHA}" >/dev/null
