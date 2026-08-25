@@ -44,9 +44,14 @@
 
 ملف التشغيل: `.github/workflows/deploy-store-theme.yml`.
 
+- المستودع الخاص: `https://github.com/ALMutasemObad/doralashab-store`.
+- بيئة GitHub المسماة `production` مفعّلة، ولا تسمح بالنشر إلا من فرع `main`.
+- حساب FTPS مستقل باسم `github-deploy@shop.doralashab.com` أُنشئ بجذر محصور في مجلد القالب فقط، وحُفظت بياناته كأسرار مشفرة في البيئة.
+- اجتاز المسار اختبار نشر كامل: فحص PHP، نسخة احتياطية، مزامنة FTPS، ثم فحص الموقع العام.
+
 - كل Pull Request وكل دفع إلى `main` يشغّل فحص ملفات القالب وصياغة PHP فقط؛ لا يحدث نشر تلقائي.
 - النشر يتم يدويًا من GitHub Actions عبر `Run workflow`، ولا يبدأ إلا عند كتابة `DEPLOY`.
-- اربط مهمة `production` ببيئة GitHub Environment باسم `production` وفعّل مراجعًا مطلوبًا قبل السماح بالنشر.
+- يمكن إضافة مراجع مطلوب إلى بيئة `production` إذا كانت خطة GitHub تتيح ذلك؛ الحماية الحالية تعتمد على المستودع الخاص، فرع `main` فقط، والتشغيل اليدوي بكلمة التأكيد.
 - أنشئ من cPanel حساب FTP مخصصًا يكون مجلده الجذري فقط:
   `/home/doralash/shop.doralashab.com/wp-content/themes/doralashab`
 - استخدم FTPS الصريح على المنفذ 21 مع التحقق من شهادة TLS، ولا تستخدم حساب cPanel الرئيسي.
