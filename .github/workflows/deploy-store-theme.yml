@@ -37,7 +37,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Check out the exact revision
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
 
       - name: Validate files and PHP syntax
         run: bash scripts/validate-theme.sh
@@ -53,7 +53,7 @@ jobs:
       url: https://shop.doralashab.com
     steps:
       - name: Check out the validated revision
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
 
       - name: Revalidate before deployment
         run: bash scripts/validate-theme.sh
@@ -97,7 +97,7 @@ jobs:
           tar -czf "$RUNNER_TEMP/theme-before-${GITHUB_SHA}.tar.gz" -C "$backup_dir" theme
 
       - name: Retain the pre-deploy backup for 14 days
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: theme-before-${{ github.sha }}
           path: ${{ runner.temp }}/theme-before-${{ github.sha }}.tar.gz
