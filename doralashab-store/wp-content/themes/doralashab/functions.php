@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-const DORALASHAB_THEME_VERSION = '2.2.0';
+const DORALASHAB_THEME_VERSION = '2.3.0';
 
 function doralashab_setup(): void {
 	load_theme_textdomain( 'doralashab', get_template_directory() . '/languages' );
@@ -16,7 +16,7 @@ function doralashab_setup(): void {
 	add_theme_support( 'wc-product-gallery-lightbox' );
 	add_theme_support( 'wc-product-gallery-slider' );
 	register_nav_menus( array( 'primary' => 'القائمة الرئيسية', 'footer' => 'قائمة التذييل' ) );
-	add_image_size( 'doralashab-book-card', 420, 560, true );
+	add_image_size( 'doralashab-book-card', 420, 560, false );
 }
 add_action( 'after_setup_theme', 'doralashab_setup' );
 
@@ -161,7 +161,7 @@ function doralashab_product_card( $product ): void {
 	?>
 	<article class="da-product-card">
 		<a class="da-product-card-image" href="<?php echo esc_url( $product->get_permalink() ); ?>">
-			<?php echo wp_kses_post( $product->get_image( 'doralashab-book-card' ) ); ?>
+			<?php echo wp_kses_post( $product->get_image( 'medium_large', array( 'loading' => 'lazy', 'sizes' => '(max-width: 560px) 72vw, (max-width: 1020px) 38vw, 235px' ) ) ); ?>
 		</a>
 		<div class="da-product-card-body">
 			<div class="da-product-meta"><?php echo $authors ? wp_kses_post( $authors ) : 'إصدارات دور الأصحاب'; ?></div>

@@ -136,7 +136,7 @@ $partners = array(
 <section class="da-section da-section--white da-workflow">
 	<div class="da-container">
 		<div class="da-section-heading" data-reveal>
-			<div><p class="da-kicker">منهج عمل واضح</p><h2>من الاحتياج إلى التسليم… بلا مناطق رمادية</h2></div>
+			<div><p class="da-kicker">منهج عمل واضح</p><h2 class="da-workflow-title">من الاحتياج إلى التسليم…<br><span>بلا مناطق رمادية</span></h2></div>
 			<p>كل مشروع يمر بمراحل يمكن متابعتها وقياسها، مع مخرجات واضحة في كل خطوة.</p>
 		</div>
 		<div class="da-workflow-grid" data-reveal>

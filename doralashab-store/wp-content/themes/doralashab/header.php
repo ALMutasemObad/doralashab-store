@@ -10,16 +10,6 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <a class="skip-link screen-reader-text" href="#main-content">تجاوز إلى المحتوى</a>
-<div class="site-topbar">
-	<div class="da-container">
-		<span class="site-topbar-kicker">شركة دور الأصحاب للنشر والتوزيع · كتب ومعرفة وحلول للمكتبات</span>
-		<div class="site-topbar-links">
-			<span>الرياض، المملكة العربية السعودية</span>
-			<a href="tel:+966555104300" dir="ltr">+966 55 510 4300</a>
-			<a href="mailto:ashab4488@gmail.com">ashab4488@gmail.com</a>
-		</div>
-	</div>
-</div>
 <header class="site-header">
 	<div class="da-container site-branding-row">
 		<div class="site-branding">
