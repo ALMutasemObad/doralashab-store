@@ -34,12 +34,12 @@
 			<?php endif; ?>
 		</div>
 	</div>
-	<nav class="main-navigation" aria-label="القائمة الرئيسية">
-		<div class="da-container">
-			<button class="da-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu"><span aria-hidden="true">☰</span> القائمة</button>
-			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_id' => 'primary-menu', 'fallback_cb' => 'doralashab_menu_fallback' ) ); ?>
-			<a class="da-header-cta" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">ناقش احتياج جهتك</a>
-		</div>
-	</nav>
 </header>
+<nav class="main-navigation" aria-label="القائمة الرئيسية">
+	<div class="da-container">
+		<button class="da-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu"><span aria-hidden="true">☰</span> القائمة</button>
+		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_id' => 'primary-menu', 'fallback_cb' => 'doralashab_menu_fallback' ) ); ?>
+		<a class="da-header-cta" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">ناقش احتياج جهتك</a>
+	</div>
+</nav>
 <main id="main-content" class="site-main">
