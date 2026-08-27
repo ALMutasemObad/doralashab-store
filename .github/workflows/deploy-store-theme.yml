@@ -98,12 +98,13 @@ jobs:
           lftp -f "$command_file"
           tar -czf "$RUNNER_TEMP/theme-before-${GITHUB_SHA}.tar.gz" -C "$backup_dir" theme
 
-      - name: Retain the pre-deploy backup for 14 days
+      - name: Retain the pre-deploy backup when artifact storage is available
+        continue-on-error: true
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: theme-before-${{ github.sha }}
           path: ${{ runner.temp }}/theme-before-${{ github.sha }}.tar.gz
-          retention-days: 14
+          retention-days: 3
           if-no-files-found: error
 
       - name: Deploy only the theme directory
