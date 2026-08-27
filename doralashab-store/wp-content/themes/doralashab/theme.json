@@ -6,13 +6,14 @@
     "layout": { "contentSize": "800px", "wideSize": "1180px" },
     "color": {
       "palette": [
-        { "slug": "green", "name": "أخضر دور الأصحاب", "color": "#0e6b4a" },
-        { "slug": "dark-green", "name": "أخضر داكن", "color": "#084d36" },
-        { "slug": "lime", "name": "ليموني فاتح", "color": "#faffc5" },
-        { "slug": "paper", "name": "ورقي", "color": "#fbfaf6" }
+        { "slug": "green", "name": "أخضر سعودي", "color": "#006c35" },
+        { "slug": "dark-green", "name": "أخضر داكن", "color": "#064b35" },
+        { "slug": "gold", "name": "ذهبي هادئ", "color": "#b78a32" },
+        { "slug": "paper", "name": "ورقي دافئ", "color": "#f7f3ea" },
+        { "slug": "ink", "name": "حبر", "color": "#1d2925" }
       ]
     },
     "typography": { "fontFamilies": [{ "fontFamily": "Cairo, Segoe UI, Tahoma, Arial, sans-serif", "name": "Cairo", "slug": "cairo" }] }
   },
-  "styles": { "typography": { "fontFamily": "var:preset|font-family|cairo" }, "color": { "text": "#173b2b", "background": "#fbfaf6" } }
+  "styles": { "typography": { "fontFamily": "var:preset|font-family|cairo" }, "color": { "text": "#1d2925", "background": "#f7f3ea" } }
 }

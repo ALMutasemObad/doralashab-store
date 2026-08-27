@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     button.addEventListener('click',()=>{
       const open=nav.classList.toggle('is-open');
       button.setAttribute('aria-expanded',String(open));
+      if(open) document.querySelector('.site-header')?.classList.remove('is-header-collapsed');
     });
     nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
       nav.classList.remove('is-open');
@@ -14,9 +15,30 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
   const header=document.querySelector('.site-header');
-  const setHeaderState=()=>header?.classList.toggle('is-scrolled',window.scrollY>20);
+  let lastScrollY=window.scrollY;
+  let headerTicking=false;
+  const setHeaderState=()=>{
+    if(!header)return;
+    const currentScrollY=window.scrollY;
+    const delta=currentScrollY-lastScrollY;
+    header.classList.toggle('is-scrolled',currentScrollY>20);
+    if(currentScrollY<70||nav?.classList.contains('is-open')){
+      header.classList.remove('is-header-collapsed');
+    }else if(delta>2){
+      header.classList.add('is-header-collapsed');
+    }else if(delta<-2){
+      header.classList.remove('is-header-collapsed');
+    }
+    lastScrollY=currentScrollY;
+    headerTicking=false;
+  };
   setHeaderState();
-  window.addEventListener('scroll',setHeaderState,{passive:true});
+  window.addEventListener('scroll',()=>{
+    if(!headerTicking){
+      window.requestAnimationFrame(setHeaderState);
+      headerTicking=true;
+    }
+  },{passive:true});
 
   const items=document.querySelectorAll('[data-reveal]');
   if(!items.length)return;

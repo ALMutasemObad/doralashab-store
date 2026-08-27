@@ -12,9 +12,20 @@ required_files=(
   "footer.php"
   "front-page.php"
   "assets/css/v2.css"
+  "assets/css/v3.css"
+  "assets/css/woocommerce.css"
   "assets/js/theme.js"
   "assets/images/favicon.svg"
+  "assets/images/og-doralashab.png"
+  "assets/images/vision-2030.png"
+  "assets/images/founder-abdulrahman-alowain.png"
   "assets/images/partners/misk.svg"
+  "assets/images/partners/pnu.png"
+  "assets/images/partners/imamu.png"
+  "assets/images/partners/hail.png"
+  "assets/images/partners/sqc.png"
+  "page-about-us.php"
+  "page-contact.php"
 )
 
 for file in "${required_files[@]}"; do
@@ -28,6 +39,18 @@ grep -Fq "Theme Name: دور الأصحاب" "$theme_dir/style.css"
 grep -Fxq "DORALASHAB_THEME_DEPLOY_ROOT_V1" "$theme_dir/.doralashab-theme-root"
 grep -Fq "const DORALASHAB_THEME_VERSION" "$theme_dir/functions.php"
 grep -Fq "شركة دور الأصحاب للنشر والتوزيع" "$theme_dir/front-page.php"
+grep -Fq "نشر وتوزيع وحلول" "$theme_dir/front-page.php"
+grep -Fq "alas3hab@gmail.com" "$theme_dir/footer.php"
+
+if grep -Fq "مكتبة الملك عبد" "$theme_dir/front-page.php"; then
+  echo "An unverified institution remains in the public homepage." >&2
+  exit 1
+fi
+
+if grep -Eq 'max\([[:space:]]*23|عنوانًا متاحًا الآن' "$theme_dir/front-page.php"; then
+  echo "An unsupported numeric storefront claim remains in the homepage." >&2
+  exit 1
+fi
 
 while IFS= read -r -d '' php_file; do
   php -l "$php_file" >/dev/null

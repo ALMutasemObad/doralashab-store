@@ -1,208 +1,222 @@
 <?php
 get_header();
 
-$product_count = 0;
-$shop_url      = home_url( '/shop/' );
-$latest        = array();
+$shop_url = home_url( '/shop/' );
+$latest   = array();
 
 if ( class_exists( 'WooCommerce' ) ) {
-	$counts        = wp_count_posts( 'product' );
-	$product_count = isset( $counts->publish ) ? (int) $counts->publish : 0;
-	$shop_url      = wc_get_page_permalink( 'shop' );
-	$latest        = wc_get_products( array( 'status' => 'publish', 'limit' => 8, 'orderby' => 'date', 'order' => 'DESC' ) );
+	$shop_url = wc_get_page_permalink( 'shop' );
+	$latest   = wc_get_products(
+		array(
+			'status'  => 'publish',
+			'limit'   => 8,
+			'orderby' => 'date',
+			'order'   => 'DESC',
+		)
+	);
 }
 
-$institutional_services = array(
-	array( 'boxes', 'توريد الكتب والمصادر', 'قوائم مختارة وطلبات كمية للمدارس والجامعات والمكتبات والجهات.' ),
-	array( 'inventory', 'الجرد والتحقق', 'حصر المقتنيات وتدقيق السجلات وإظهار الفاقد والمكرر بحالة واضحة.' ),
-	array( 'leaf', 'التعشيب وتنمية المجموعات', 'تقييم المجموعات واستبعاد ما لا يحقق سياسة المكتبة وبناء بدائل أنسب.' ),
-	array( 'catalog', 'الفهرسة والتصنيف', 'وصف ببليوجرافي وتصنيف موضوعي يساعد المستفيد في الوصول السريع.' ),
-	array( 'barcode', 'الترميز والتجهيز الفني', 'باركود وملصقات كعب وأختام وتغليف وتجهيز جاهز للوضع على الرف.' ),
-	array( 'library', 'إدارة وتشغيل المكتبات', 'إجراءات تشغيل ومتابعة إعارة وتقارير أداء وتطوير تجربة المستفيد.' ),
+$sectors = array(
+	array( 'library', 'مكتبات عامة', 'تنمية المجموعات وتنظيمها وتحسين الوصول إلى مصادر المعرفة.' ),
+	array( 'university', 'جامعات', 'مصادر أكاديمية وتوريد منظم وخدمات فنية للمكتبات الجامعية.' ),
+	array( 'government', 'جهات حكومية', 'نطاقات عمل واضحة وتنفيذ منظم ومخرجات قابلة للاستلام.' ),
+	array( 'school', 'مدارس', 'مصادر إثرائية ومكتبات صفية وحلول للمكتبة المدرسية.' ),
 );
 
-$partners = array(
-	array( 'misk.svg', 'مؤسسة الأمير محمد بن سلمان «مسك»', 'misk' ),
-	array( 'king-abdulaziz-library.png', 'مكتبة الملك عبد العزيز', 'kapl' ),
-	array( 'king-fahd-library.png', 'مكتبة الملك فهد', 'kfnl' ),
+$services = array(
+	array( 'pen', 'النشر والإنتاج المعرفي', 'تحرير وتدقيق وتصميم وإخراج وطباعة ضمن مسار إنتاج واضح.', home_url( '/publishing-services/' ) ),
+	array( 'boxes', 'التوزيع وتوريد الكتب', 'بناء قوائم المصادر وتوريد الكتب العربية والأجنبية بحسب احتياج الجهة.', home_url( '/library-services/' ) ),
+	array( 'library', 'تطوير وتجهيز المكتبات', 'تنمية المجموعات وتنظيمها وتجهيزها بما يناسب المستفيدين.', home_url( '/library-services/' ) ),
+	array( 'inventory', 'الجرد والتعشيب والفحص', 'حصر المقتنيات وتدقيق السجلات وفحص الحالة وإعداد كشوف المراجعة.', home_url( '/library-services/' ) ),
+	array( 'catalog', 'التجهيز الفني والتشغيل', 'فهرسة وتصنيف وترميز وملصقات وإجراءات تشغيل بحسب نطاق المشروع.', home_url( '/library-services/' ) ),
+	array( 'layers', 'إدارة المشاريع المعرفية', 'تحويل الاحتياج إلى نطاق وخطة ومخرجات ومتابعة التنفيذ حتى التسليم.', home_url( '/contact/' ) ),
+);
+
+$workflow = array(
+	array( '01', 'نفهم الاحتياج', 'أهداف الجهة وطبيعة المستفيدين وسياق المشروع.' ),
+	array( '02', 'نحدد النطاق', 'الأعمال والمخرجات والمسؤوليات ومعايير القبول.' ),
+	array( '03', 'نبني الخطة', 'مسار التنفيذ والتوريد والمراجعة والاعتماد.' ),
+	array( '04', 'ننفذ ونراجع', 'تنفيذ منظم والتحقق من المطابقة وجودة المخرجات.' ),
+	array( '05', 'نوثق التقدم', 'كشوف وملاحظات وقرارات تحفظ وضوح المشروع.' ),
+	array( '06', 'نسلم ونتابع', 'فحص واستلام وتوصيات تدعم التشغيل والمتابعة.' ),
+);
+
+$deliverables = array(
+	array( 'document', 'نطاق وخطة تنفيذ' ),
+	array( 'catalog', 'قوائم ومواصفات' ),
+	array( 'barcode', 'مواد وبيانات مجهزة' ),
+	array( 'quality', 'كشوف وتقارير' ),
+	array( 'check', 'محاضر فحص وتسليم' ),
+	array( 'target', 'توصيات تشغيل ومتابعة' ),
+);
+
+$presence = array(
+	array( 'king-fahd-library.png', 'مكتبة الملك فهد الوطنية', 'kfnl' ),
+	array( 'imamu.png', 'جامعة الإمام محمد بن سعود الإسلامية', 'imamu' ),
+	array( 'hail.png', 'جامعة حائل', 'hail' ),
+	array( 'pnu.png', 'جامعة الأميرة نورة بنت عبدالرحمن', 'pnu' ),
+	array( 'misk.svg', 'مؤسسة محمد بن سلمان «مسك»', 'misk' ),
+	array( 'sqc.png', 'المجلس السعودي للجودة', 'sqc' ),
 	array( 'riyadh-schools.svg', 'مدارس الرياض', 'riyadh-schools' ),
-	array( 'downe-house-riyadh.png', 'مدارس داون هاوس', 'downe-house' ),
+	array( 'downe-house-riyadh.png', 'داون هاوس الرياض', 'downe-house' ),
 	array( 'alandalus-schools.svg', 'مدارس الأندلس', 'alandalus' ),
 );
 ?>
 
-<section class="da-hero da-hero--editorial">
-	<div class="da-hero-orbit da-hero-orbit--one" aria-hidden="true"></div>
-	<div class="da-hero-orbit da-hero-orbit--two" aria-hidden="true"></div>
-	<div class="da-container da-hero-grid">
-		<div class="da-hero-copy-wrap" data-reveal>
-			<p class="da-eyebrow"><span></span> دار نشر · متجر كتب · حلول مكتبات</p>
-			<h1>نصنع للمعرفة<br><em>مكانًا يليق بها.</em></h1>
-			<p class="da-hero-copy">من مخطوط المؤلف إلى رف القارئ، ومن احتياج المدرسة إلى مكتبة مكتملة التجهيز؛ تجمع شركة دور الأصحاب المحتوى والخبرة والتنفيذ في رحلة واحدة دقيقة.</p>
-			<div class="da-hero-actions">
-				<a class="da-button da-button--light" href="<?php echo esc_url( $shop_url ); ?>">تصفح الكتب <?php doralashab_icon( 'arrow' ); ?></a>
-				<a class="da-button da-button--outline" href="<?php echo esc_url( home_url( '/library-services/' ) ); ?>">حلول الجهات والمكتبات</a>
-			</div>
-			<div class="da-hero-proof" aria-label="مزايا شركة دور الأصحاب">
-				<span><?php doralashab_icon( 'check' ); ?> إصدارات عربية مختارة</span>
-				<span><?php doralashab_icon( 'check' ); ?> تنفيذ مؤسسي موثّق</span>
-				<span><?php doralashab_icon( 'check' ); ?> شحن داخل المملكة</span>
-			</div>
+<section class="da-profile-hero" aria-labelledby="home-hero-title">
+	<span class="da-profile-hero-lines da-profile-hero-lines--top" aria-hidden="true"></span>
+	<span class="da-profile-hero-lines da-profile-hero-lines--bottom" aria-hidden="true"></span>
+	<div class="da-container da-profile-hero-inner" data-reveal>
+		<?php if ( file_exists( get_template_directory() . '/assets/images/logo.png' ) ) : ?>
+			<img class="da-profile-hero-logo" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.png' ); ?>" alt="شركة دور الأصحاب للنشر والتوزيع" width="435" height="184">
+		<?php endif; ?>
+		<p class="da-profile-kicker">شركة سعودية في خدمة المعرفة</p>
+		<h1 id="home-hero-title"><span>نشر وتوزيع وحلول</span><span>مؤسسية للمعرفة</span></h1>
+		<p class="da-profile-hero-copy"><span>خبرة سعودية تجمع صناعة المحتوى وتوريد المصادر،</span><span>وتطوير المكتبات ضمن مسار مؤسسي واضح وموثوق.</span></p>
+		<div class="da-hero-actions">
+			<a class="da-button" href="<?php echo esc_url( $shop_url ); ?>">تصفح الكتب <?php doralashab_icon( 'arrow' ); ?></a>
+			<a class="da-button da-button--quiet" href="<?php echo esc_url( home_url( '/library-services/' ) ); ?>">حلول الجهات والمكتبات</a>
 		</div>
-		<div class="da-hero-visual" data-reveal>
-			<div class="da-hero-image-frame">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/hero-publishing-v2.webp' ); ?>" alt="كتاب مفتوح يمتد إلى ممر من المعرفة داخل مكتبة أنيقة">
-			</div>
-			<div class="da-floating-note da-floating-note--top"><span>رحلة متكاملة</span><strong>من الفكرة إلى القارئ</strong></div>
-			<div class="da-floating-note da-floating-note--bottom"><strong><?php echo esc_html( max( 23, $product_count ) ); ?>+</strong><span>عنوانًا متاحًا الآن</span></div>
+		<ul class="da-hero-sectors" aria-label="القطاعات التي تخدمها الشركة">
+			<?php foreach ( $sectors as $sector ) : ?>
+				<li><span><?php doralashab_icon( $sector[0] ); ?></span><strong><?php echo esc_html( $sector[1] ); ?></strong></li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+	<div class="da-saudi-band">
+		<div class="da-container">
+			<div class="da-saudi-band-copy"><span>جذور سعودية</span><strong>نخدم المعرفة بما يواكب طموح المملكة</strong></div>
+			<?php if ( file_exists( get_template_directory() . '/assets/images/vision-2030.png' ) ) : ?>
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/vision-2030.png' ); ?>" alt="رؤية السعودية 2030" loading="eager">
+			<?php endif; ?>
 		</div>
 	</div>
 </section>
 
-<section class="da-trustbar">
-	<div class="da-container da-trust-grid">
-		<div class="da-trust-item"><span class="da-trust-icon"><?php doralashab_icon( 'book' ); ?></span><div><strong>متجر كتب متخصص</strong><span>اختيار واضح وتجربة شراء سهلة</span></div></div>
-		<div class="da-trust-item"><span class="da-trust-icon"><?php doralashab_icon( 'pen' ); ?></span><div><strong>نشر وإنتاج</strong><span>من تحرير المخطوط إلى الطباعة</span></div></div>
-		<div class="da-trust-item"><span class="da-trust-icon"><?php doralashab_icon( 'boxes' ); ?></span><div><strong>توريد للجهات</strong><span>قوائم وكميات وتجهيز حسب الاحتياج</span></div></div>
-		<div class="da-trust-item"><span class="da-trust-icon"><?php doralashab_icon( 'library' ); ?></span><div><strong>حلول مكتبات</strong><span>جرد وفهرسة وتعشيب وتشغيل</span></div></div>
+<section class="da-section da-snapshot-section" id="about">
+	<div class="da-container da-snapshot-grid">
+		<div class="da-snapshot-copy" data-reveal>
+			<p class="da-kicker">الشركة في لمحة</p>
+			<h2>مسيرة سعودية<br><span>في خدمة المعرفة</span></h2>
+			<p class="da-lead">بدأت شركة دور الأصحاب مسيرتها عام 1423هـ، وتطورت من دار للنشر والتوزيع إلى منظومة حلول معرفية تربط صناعة المحتوى بتوريد المصادر وتجهيز المكتبات.</p>
+			<a class="da-text-link" href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>">اكتشف قصة الشركة <?php doralashab_icon( 'arrow' ); ?></a>
+		</div>
+		<div class="da-snapshot-panel" data-reveal>
+			<div class="da-snapshot-date"><span>منذ عام</span><strong>1423 هـ</strong><small>خبرة تتجاوز 23 عاماً</small></div>
+			<div class="da-snapshot-list">
+				<div><span><?php doralashab_icon( 'pen' ); ?></span><p><strong>صناعة المحتوى</strong><small>نشر وإنتاج معرفي</small></p></div>
+				<div><span><?php doralashab_icon( 'boxes' ); ?></span><p><strong>وصول الكتاب</strong><small>توزيع وتوريد المصادر</small></p></div>
+				<div><span><?php doralashab_icon( 'library' ); ?></span><p><strong>خدمة المؤسسة</strong><small>حلول للمكتبات والجهات</small></p></div>
+			</div>
+		</div>
 	</div>
 </section>
 
-<section class="da-section da-section--white da-audiences" id="reading-paths">
+<section class="da-section da-section--white da-sector-section" aria-labelledby="sectors-title">
 	<div class="da-container">
-		<div class="da-section-heading" data-reveal>
-			<div><p class="da-kicker">مسارات صنعت لكل قارئ</p><h2>القراءة تبدأ مبكرًا… وتكبر مع المدرسة</h2></div>
-			<p>أقسام واضحة تساعد الأسرة والمعلم وأمين المكتبة في الوصول إلى النوع المناسب من المحتوى.</p>
+		<div class="da-section-heading da-section-heading--center" data-reveal>
+			<p class="da-kicker">القطاعات التي نخدمها</p>
+			<h2 id="sectors-title">حلول تتكيّف مع طبيعة كل جهة</h2>
+			<p>نبني الخدمة وفق سياق الجهة وطبيعة مستفيديها ونطاق المشروع، لا وفق قالب واحد للجميع.</p>
 		</div>
-		<div class="da-audience-grid">
-			<a class="da-audience-card da-audience-card--children" href="<?php echo esc_url( home_url( '/childrens-books/' ) ); ?>" data-reveal>
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/children-learning-v2.webp' ); ?>" alt="أطفال يقرؤون في ركن مكتبة مشرق">
-				<span class="da-audience-overlay"></span>
-				<span class="da-audience-content">
-					<span class="da-audience-label">عوالم صغيرة… أثر كبير</span>
-					<strong>كتب الأطفال</strong>
-					<span>قصص مصورة · قراءة مبكرة · قيم ومعرفة</span>
-					<span class="da-audience-link">اكتشف القسم <?php doralashab_icon( 'arrow' ); ?></span>
-				</span>
-			</a>
-			<a class="da-audience-card da-audience-card--school" href="<?php echo esc_url( home_url( '/school-books/' ) ); ?>" data-reveal>
-				<span class="da-school-pattern" aria-hidden="true"></span>
-				<span class="da-school-content">
-					<span class="da-audience-label">للمدارس والمعلمين</span>
-					<strong>كتب المدارس</strong>
-					<span>قراءة إثرائية ومصادر مساندة تبني مكتبة مدرسية أكثر حيوية.</span>
-					<span class="da-school-tags"><i>مكتبة صفية</i><i>حقائب قراءة</i><i>مصادر للمعلم</i></span>
-					<span class="da-audience-link">اعرف حلول المدارس <?php doralashab_icon( 'arrow' ); ?></span>
-				</span>
-				<span class="da-school-shelf" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-			</a>
+		<div class="da-sector-cards">
+			<?php foreach ( $sectors as $index => $sector ) : ?>
+				<article class="da-sector-card" data-reveal>
+					<span class="da-sector-order"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
+					<span class="da-sector-icon"><?php doralashab_icon( $sector[0] ); ?></span>
+					<h3><?php echo esc_html( $sector[1] ); ?></h3>
+					<p><?php echo esc_html( $sector[2] ); ?></p>
+				</article>
+			<?php endforeach; ?>
+		</div>
+	</div>
+</section>
+
+<section class="da-section da-capabilities-section" id="services" aria-labelledby="services-title">
+	<div class="da-container">
+		<div class="da-capabilities-heading" data-reveal>
+			<div><p class="da-kicker da-kicker--light">منظومة مترابطة</p><h2 id="services-title"><span>تخدم الكتاب،</span><span>وتفهم المؤسسة.</span></h2></div>
+			<p>نغطي دورة المعرفة من الفكرة والإنتاج إلى التوريد والتجهيز والتشغيل، وفق نطاق يناسب طبيعة كل مشروع.</p>
+		</div>
+		<div class="da-capability-grid">
+			<?php foreach ( $services as $index => $service ) : ?>
+				<a class="da-capability-card" href="<?php echo esc_url( $service[3] ); ?>" data-reveal>
+					<span class="da-capability-top"><i><?php doralashab_icon( $service[0] ); ?></i><small><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></small></span>
+					<h3><?php echo esc_html( $service[1] ); ?></h3>
+					<p><?php echo esc_html( $service[2] ); ?></p>
+					<span class="da-card-arrow" aria-hidden="true"><?php doralashab_icon( 'arrow' ); ?></span>
+				</a>
+			<?php endforeach; ?>
 		</div>
 	</div>
 </section>
 
 <?php if ( $latest ) : ?>
-<section class="da-section da-books-section">
-	<div class="da-container">
-		<div class="da-section-heading" data-reveal>
-			<div><p class="da-kicker">على رفوفنا الآن</p><h2>إصدارات تستحق مكانًا في مكتبتك</h2></div>
-			<a class="da-text-link" href="<?php echo esc_url( $shop_url ); ?>">مشاهدة كل الكتب <?php doralashab_icon( 'arrow' ); ?></a>
+	<section class="da-section da-books-section" aria-labelledby="books-title">
+		<div class="da-container">
+			<div class="da-section-heading" data-reveal>
+				<div><p class="da-kicker">مختارات من المتجر</p><h2 id="books-title">إصدارات لقارئ يبحث عن قيمة</h2></div>
+				<div class="da-section-side"><p>كتب في الأدب والمعرفة والإدارة والتعليم ومجالات متنوعة، ضمن تجربة تصفح واضحة وسهلة.</p><a class="da-text-link" href="<?php echo esc_url( $shop_url ); ?>">مشاهدة كل الكتب <?php doralashab_icon( 'arrow' ); ?></a></div>
+			</div>
+			<div class="da-products-grid" data-reveal>
+				<?php foreach ( $latest as $item ) { doralashab_product_card( $item ); } ?>
+			</div>
 		</div>
-		<div class="da-products-grid" data-reveal>
-			<?php foreach ( $latest as $item ) { doralashab_product_card( $item ); } ?>
-		</div>
-	</div>
-</section>
+	</section>
 <?php endif; ?>
 
-<section class="da-section da-services-section" id="library-solutions">
-	<div class="da-container">
-		<div class="da-services-intro" data-reveal>
-			<div><p class="da-kicker da-kicker--light">حلول مؤسسية من مصدر واحد</p><h2>المكتبة الناجحة ليست رفوفًا فقط؛<br>إنها منظومة تعمل بدقة.</h2></div>
-			<div><p>نساعد الجهات في بناء مجموعة مناسبة، تنظيمها، تجهيزها، ثم إدارة دورة حياتها بأدوات وإجراءات واضحة.</p><a class="da-button da-button--light" href="<?php echo esc_url( home_url( '/library-services/' ) ); ?>">تفاصيل حلول المكتبات</a></div>
-		</div>
-		<div class="da-institutional-grid">
-			<?php foreach ( $institutional_services as $index => $service ) : ?>
-			<article class="da-institutional-card" data-reveal>
-				<span class="da-service-number"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
-				<span class="da-service-icon"><?php doralashab_icon( $service[0] ); ?></span>
-				<h3><?php echo esc_html( $service[1] ); ?></h3>
-				<p><?php echo esc_html( $service[2] ); ?></p>
-			</article>
-			<?php endforeach; ?>
-		</div>
-	</div>
-</section>
-
-<section class="da-section da-section--white da-workflow">
+<section class="da-section da-method-section" aria-labelledby="method-title">
 	<div class="da-container">
 		<div class="da-section-heading" data-reveal>
-			<div><p class="da-kicker">منهج عمل واضح</p><h2 class="da-workflow-title">من الاحتياج إلى التسليم…<br><span>بلا مناطق رمادية</span></h2></div>
-			<p>كل مشروع يمر بمراحل يمكن متابعتها وقياسها، مع مخرجات واضحة في كل خطوة.</p>
+			<div><p class="da-kicker">منهج عمل واضح</p><h2 id="method-title" class="da-balanced-title"><span>من الاحتياج إلى التسليم…</span><span>بلا مناطق رمادية</span></h2></div>
+			<p>منهج مرحلي يوضح الأعمال والمخرجات والمسؤوليات، ويجعل الفحص والاستلام جزءاً من التنفيذ.</p>
 		</div>
-		<div class="da-workflow-grid" data-reveal>
-			<div class="da-workflow-step"><span>01</span><strong>نفهم الاحتياج</strong><p>نوع المستفيدين، حجم المجموعة، الميزانية، والسياسات المعتمدة.</p></div>
-			<div class="da-workflow-step"><span>02</span><strong>نبني الخطة</strong><p>قائمة توريد أو نطاق عمل وجدول تنفيذ ومؤشرات استلام.</p></div>
-			<div class="da-workflow-step"><span>03</span><strong>ننفذ ونوثّق</strong><p>تجهيز وفهرسة وجرد ومراجعة جودة مع تقارير مرحلية.</p></div>
-			<div class="da-workflow-step"><span>04</span><strong>نسلّم ونتابع</strong><p>مخرجات جاهزة للاستخدام ودليل متابعة وتوصيات للتطوير.</p></div>
-		</div>
-		<div class="da-sector-strip" data-reveal>
-			<span>نصمم الحل حسب نوع الجهة</span><i>المدارس</i><i>الجامعات</i><i>المكتبات العامة</i><i>الجهات الحكومية</i><i>مراكز التدريب</i><i>الشركات</i>
-		</div>
-	</div>
-</section>
-
-<section class="da-section da-partners-section" aria-labelledby="partners-title">
-	<div class="da-container">
-		<div class="da-partners-heading" data-reveal>
-			<div>
-				<p class="da-kicker">ثقة نعتز بها</p>
-				<h2 id="partners-title">شركاء في صناعة الأثر والمعرفة</h2>
-			</div>
-			<p>جهات تشرفنا بالعمل معها في مشاريع الكتب والنشر والتوريد والخدمات المعرفية.</p>
-		</div>
-		<div class="da-partners-grid" data-reveal>
-			<?php foreach ( $partners as $partner ) : ?>
-			<article class="da-partner-card da-partner-card--<?php echo esc_attr( $partner[2] ); ?>">
-				<div class="da-partner-logo-wrap">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/partners/' . $partner[0] ); ?>" alt="شعار <?php echo esc_attr( $partner[1] ); ?>" loading="lazy">
-				</div>
-				<h3><?php echo esc_html( $partner[1] ); ?></h3>
-			</article>
+		<div class="da-method-grid" data-reveal>
+			<?php foreach ( $workflow as $step ) : ?>
+				<article><span><?php echo esc_html( $step[0] ); ?></span><h3><?php echo esc_html( $step[1] ); ?></h3><p><?php echo esc_html( $step[2] ); ?></p></article>
 			<?php endforeach; ?>
 		</div>
-	</div>
-</section>
-
-<section class="da-section da-publishing-section">
-	<div class="da-container da-publishing-grid">
-		<div class="da-publishing-copy" data-reveal>
-			<p class="da-kicker">للمؤلفين ودور النشر</p>
-			<h2>الفكرة الجيدة تستحق إنتاجًا يرفع قيمتها</h2>
-			<p>نبني لكل كتاب مساره المناسب؛ نراجع المحتوى، نصقل اللغة، نصمم الهوية، ونجهز المنتج للنشر والطباعة والتوزيع.</p>
-			<a class="da-button" href="<?php echo esc_url( home_url( '/publishing-services/' ) ); ?>">استكشف خدمات النشر <?php doralashab_icon( 'arrow' ); ?></a>
-		</div>
-		<div class="da-publishing-journey" data-reveal>
-			<div><span><?php doralashab_icon( 'pen' ); ?></span><strong>تحرير وتدقيق</strong><small>وضوح في الفكرة وسلامة في اللغة</small></div>
-			<div><span><?php doralashab_icon( 'book' ); ?></span><strong>تصميم وإخراج</strong><small>هوية بصرية وتجربة قراءة متقنة</small></div>
-			<div><span><?php doralashab_icon( 'inventory' ); ?></span><strong>طباعة وإنتاج</strong><small>مواصفات مناسبة ومراجعة جودة</small></div>
-			<div><span><?php doralashab_icon( 'boxes' ); ?></span><strong>نشر وتوزيع</strong><small>وصول منظم إلى القنوات والقراء</small></div>
+		<div class="da-deliverables" data-reveal>
+			<div class="da-deliverables-copy"><p class="da-kicker da-kicker--light">مخرجات قابلة للمراجعة والاستلام</p><h3>ما الذي تستلمه الجهة؟</h3><p>تتحدد المخرجات بحسب طبيعة المشروع ونطاقه، وقد تشمل:</p></div>
+			<div class="da-deliverables-grid">
+				<?php foreach ( $deliverables as $item ) : ?><span><?php doralashab_icon( $item[0] ); ?><strong><?php echo esc_html( $item[1] ); ?></strong></span><?php endforeach; ?>
+			</div>
 		</div>
 	</div>
 </section>
 
-<section class="da-section da-section--white">
-	<div class="da-container da-about-grid da-about-grid--v2">
-		<div class="da-about-mark" data-reveal>
-			<span class="da-about-ring" aria-hidden="true"></span>
-			<?php if ( file_exists( get_template_directory() . '/assets/images/logo.png' ) ) : ?><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.png' ); ?>" alt="شركة دور الأصحاب للنشر والتوزيع"><?php endif; ?>
-			<small>نشر · توزيع · معرفة</small>
+<section class="da-section da-presence-section" id="institutional-presence" aria-labelledby="presence-title">
+	<div class="da-container">
+		<div class="da-section-heading da-section-heading--center" data-reveal>
+			<p class="da-kicker">حضور مؤسسي ومعرفي</p>
+			<h2 id="presence-title">محطات في التعليم والثقافة والجودة</h2>
+			<p>نماذج تعكس امتداد حضور الدار في سوق الكتاب والمعرفة، مع اختلاف طبيعة الحضور والتعاون من جهة إلى أخرى.</p>
 		</div>
-		<div class="da-about-copy" data-reveal>
-			<p class="da-kicker">عن شركة دور الأصحاب</p>
-			<h2>شريك ثقافي يرى التفاصيل التي تصنع الفرق</h2>
-			<p>ننظر إلى الكتاب بوصفه محتوى وتجربة ومنتجًا يجب أن يصل إلى قارئه بصورة تليق به. لذلك نجمع العناية التحريرية، الجودة البصرية، والانضباط التشغيلي في منظومة واحدة.</p>
-			<ul class="da-bullets"><li>عناية بالمحتوى واللغة</li><li>تصميم يعبّر عن الكتاب</li><li>تنفيذ مؤسسي قابل للقياس</li><li>تواصل ومتابعة واضحة</li></ul>
-			<a class="da-text-link" href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>">تعرف أكثر على الدار <?php doralashab_icon( 'arrow' ); ?></a>
+		<div class="da-presence-grid" data-reveal>
+			<?php foreach ( $presence as $partner ) : ?>
+				<article class="da-presence-card da-presence-card--<?php echo esc_attr( $partner[2] ); ?>">
+					<div><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/partners/' . $partner[0] ); ?>" alt="<?php echo esc_attr( $partner[1] ); ?>" loading="lazy"></div>
+					<h3><?php echo esc_html( $partner[1] ); ?></h3>
+					<?php if ( 'imamu' === $partner[2] ) : ?><small>حضور إصدارات الدار</small><?php endif; ?>
+				</article>
+			<?php endforeach; ?>
+		</div>
+		<div class="da-fairs-band" data-reveal>
+			<span class="da-fairs-icon"><?php doralashab_icon( 'globe' ); ?></span>
+			<div><p class="da-kicker da-kicker--light">حضور معرفي ممتد</p><h3>مشاركة في معارض الكتاب الدولية</h3><p>حضور يعزز وصول الإصدارات، ويوسع قنوات التوزيع والتواصل مع الناشرين والقراء.</p></div>
+		</div>
+	</div>
+</section>
+
+<section class="da-founder-preview" aria-labelledby="founder-title">
+	<div class="da-founder-image" aria-hidden="true"></div>
+	<div class="da-container da-founder-preview-inner">
+		<div class="da-founder-copy" data-reveal>
+			<p class="da-kicker da-kicker--light">المؤسس</p>
+			<h2 id="founder-title">خبرة تقود<br>رؤية الدار</h2>
+			<p>يقود الأستاذ عبدالرحمن بن سعد العوين مسيرة تتجاوز 23 عاماً في سوق النشر والتوزيع، مع تركيز على صناعة الكتاب ووصوله إلى القارئ والمؤسسة.</p>
+			<p>وترتكز رؤيته على فهم احتياجات قطاع المعرفة في المملكة، وربط جودة المحتوى بانضباط التنفيذ واستدامة الأثر.</p>
+			<a class="da-button da-button--light" href="<?php echo esc_url( home_url( '/about-us/#founder' ) ); ?>">تعرّف إلى مسيرة المؤسس <?php doralashab_icon( 'arrow' ); ?></a>
 		</div>
 	</div>
 </section>
