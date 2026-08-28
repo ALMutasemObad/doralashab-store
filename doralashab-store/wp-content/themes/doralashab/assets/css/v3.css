@@ -61,17 +61,18 @@ select:focus-visible {
 .site-header.is-scrolled { box-shadow: 0 12px 38px rgba(20, 55, 42, .08); }
 .site-header.is-header-collapsed { transform: translateY(-100%); box-shadow: none; }
 .site-branding-row {
-	grid-template-columns: minmax(210px, 255px) minmax(280px, 1fr) auto;
+	grid-template-columns: minmax(300px, 360px) minmax(280px, 1fr) auto;
 	gap: clamp(1rem, 3vw, 2.6rem);
 	padding-block: .65rem;
 }
 .custom-logo-link,
-.da-fallback-logo { width: 100%; min-width: 0; max-width: 245px; }
+.da-fallback-logo { width: 100%; min-width: 0; max-width: 350px; }
 .custom-logo,
 .da-fallback-logo img {
 	width: 100% !important;
-	max-width: 245px !important;
-	max-height: 78px;
+	height: auto;
+	max-width: 350px !important;
+	max-height: none;
 	object-fit: contain;
 	object-position: center right;
 }
@@ -597,6 +598,8 @@ select:focus-visible {
 .footer-links-cluster { gap: clamp(1.5rem, 3vw, 3.4rem); }
 .footer-column h2 { font-size: 1rem; }
 .footer-column h2::after { background: var(--da-gold); }
+.footer-contact > h2 { width: fit-content; margin: 0 auto 1.35rem; text-align: center; }
+.footer-contact > h2::after { inset-inline: 0; width: 100%; }
 .footer-column li { color: #c0d0c7; font-size: .84rem; }
 .footer-links-column { text-align: center; }
 .footer-links-column h2::after { inset-inline-start: 50%; transform: translateX(50%); }
@@ -631,8 +634,8 @@ select:focus-visible {
 .da-empty-catalog { border-color: #bdc9c1; background: var(--da-white); }
 
 @media (max-width: 1120px) {
-	.site-branding-row { grid-template-columns: minmax(185px, 220px) minmax(250px, 1fr) auto; }
-	.custom-logo-link, .da-fallback-logo, .custom-logo, .da-fallback-logo img { max-width: 215px !important; }
+	.site-branding-row { grid-template-columns: minmax(260px, 300px) minmax(250px, 1fr) auto; }
+	.custom-logo-link, .da-fallback-logo, .custom-logo, .da-fallback-logo img { max-width: 295px !important; }
 	.da-header-cta { display: none; }
 	.main-navigation a { padding-inline: .58rem; font-size: .79rem; }
 	.da-snapshot-grid { grid-template-columns: .82fr 1.18fr; gap: 3rem; }
@@ -715,7 +718,7 @@ select:focus-visible {
 
 @media (max-width: 520px) {
 	.site-branding-row { gap: .55rem; }
-	.custom-logo-link, .da-fallback-logo, .custom-logo, .da-fallback-logo img { max-width: 162px !important; max-height: 60px; }
+	.custom-logo-link, .da-fallback-logo, .custom-logo, .da-fallback-logo img { max-width: 180px !important; }
 	.da-account-link { display: none; }
 	.da-cart-link { display: inline-flex !important; padding: .45rem; }
 	.da-cart-link .da-icon-link-label { display: none; }
