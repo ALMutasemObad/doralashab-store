@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-const DORALASHAB_THEME_VERSION = '3.0.2';
+const DORALASHAB_THEME_VERSION = '4.0.0';
 
 function doralashab_setup(): void {
 	load_theme_textdomain( 'doralashab', get_template_directory() . '/languages' );
@@ -25,8 +25,9 @@ function doralashab_enqueue_assets(): void {
 	wp_enqueue_style( 'doralashab-style', get_stylesheet_uri(), array(), DORALASHAB_THEME_VERSION );
 	wp_enqueue_style( 'doralashab-v2', get_template_directory_uri() . '/assets/css/v2.css', array( 'doralashab-style' ), DORALASHAB_THEME_VERSION );
 	wp_enqueue_style( 'doralashab-v3', get_template_directory_uri() . '/assets/css/v3.css', array( 'doralashab-v2' ), DORALASHAB_THEME_VERSION );
+	wp_enqueue_style( 'doralashab-national-day', get_template_directory_uri() . '/assets/css/national-day.css', array( 'doralashab-v3' ), DORALASHAB_THEME_VERSION );
 	if ( function_exists( 'is_woocommerce' ) && ( is_woocommerce() || is_cart() || is_checkout() || is_account_page() ) ) {
-		wp_enqueue_style( 'doralashab-woocommerce', get_template_directory_uri() . '/assets/css/woocommerce.css', array( 'doralashab-v3' ), DORALASHAB_THEME_VERSION );
+		wp_enqueue_style( 'doralashab-woocommerce', get_template_directory_uri() . '/assets/css/woocommerce.css', array( 'doralashab-national-day' ), DORALASHAB_THEME_VERSION );
 	}
 	wp_enqueue_script( 'doralashab-theme', get_template_directory_uri() . '/assets/js/theme.js', array(), DORALASHAB_THEME_VERSION, true );
 }
@@ -36,6 +37,7 @@ function doralashab_menu_fallback(): void {
 	echo '<ul id="primary-menu">';
 	printf( '<li><a href="%s">الرئيسية</a></li>', esc_url( home_url( '/' ) ) );
 	printf( '<li><a href="%s">المتجر</a></li>', esc_url( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' ) ) );
+	printf( '<li><a href="%s">العروض المدرسية</a></li>', esc_url( home_url( '/#national-day-products' ) ) );
 	echo '<li class="menu-item-has-children"><a href="' . esc_url( home_url( '/#services' ) ) . '">خدماتنا</a><ul class="sub-menu">';
 	printf( '<li><a href="%s">النشر والإنتاج المعرفي</a></li>', esc_url( home_url( '/publishing-services/' ) ) );
 	printf( '<li><a href="%s">التوزيع وتوريد الكتب</a></li>', esc_url( home_url( '/#services' ) ) );
@@ -197,9 +199,9 @@ function doralashab_social_meta(): void {
 		return;
 	}
 
-	$title       = is_front_page() ? 'شركة دور الأصحاب للنشر والتوزيع' : wp_get_document_title();
-	$description = 'نشر وتوزيع وحلول مؤسسية للمعرفة، من صناعة المحتوى إلى توريد الكتب وتطوير المكتبات.';
-	$image       = get_template_directory_uri() . '/assets/images/og-doralashab.png';
+	$title       = is_front_page() ? 'هِمّة تتعلّم | عروض اليوم الوطني من دور الأصحاب' : wp_get_document_title();
+	$description = is_front_page() ? 'هِمّة تتعلّم: عروض اليوم الوطني على الحقائب والأقلام والألوان والقرطاسيات المدرسية.' : 'نشر وتوزيع وحلول مؤسسية للمعرفة، من صناعة المحتوى إلى توريد الكتب وتطوير المكتبات.';
+	$image       = is_front_page() ? get_template_directory_uri() . '/assets/images/national-day-campaign.jpg' : get_template_directory_uri() . '/assets/images/og-doralashab.png';
 	$url         = is_singular() ? get_permalink() : home_url( '/' );
 	?>
 	<meta name="description" content="<?php echo esc_attr( $description ); ?>">
@@ -209,12 +211,97 @@ function doralashab_social_meta(): void {
 	<meta property="og:description" content="<?php echo esc_attr( $description ); ?>">
 	<meta property="og:url" content="<?php echo esc_url( $url ); ?>">
 	<meta property="og:image" content="<?php echo esc_url( $image ); ?>">
-	<meta property="og:image:width" content="1731">
-	<meta property="og:image:height" content="909">
+	<meta property="og:image:width" content="<?php echo is_front_page() ? '1600' : '1731'; ?>">
+	<meta property="og:image:height" content="<?php echo is_front_page() ? '901' : '909'; ?>">
+	<meta property="og:image:alt" content="<?php echo esc_attr( is_front_page() ? 'هِمّة تتعلّم — عروض اليوم الوطني' : 'شركة دور الأصحاب للنشر والتوزيع' ); ?>">
 	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="<?php echo esc_attr( $title ); ?>">
+	<meta name="twitter:description" content="<?php echo esc_attr( $description ); ?>">
+	<meta name="twitter:image" content="<?php echo esc_url( $image ); ?>">
 	<?php
 }
 add_action( 'wp_head', 'doralashab_social_meta', 5 );
+
+function doralashab_campaign_document_title( string $title ): string {
+	return is_front_page() ? 'هِمّة تتعلّم | عروض اليوم الوطني من دور الأصحاب' : $title;
+}
+add_filter( 'pre_get_document_title', 'doralashab_campaign_document_title' );
+
+/**
+ * Add the limited National Day school collection to WooCommerce once.
+ */
+function doralashab_attach_campaign_image( int $product_id, string $filename, string $title ): void {
+	if ( has_post_thumbnail( $product_id ) ) {
+		return;
+	}
+
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/media.php';
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+
+	$image_id = media_sideload_image(
+		get_template_directory_uri() . '/assets/images/' . $filename,
+		$product_id,
+		$title,
+		'id'
+	);
+	if ( ! is_wp_error( $image_id ) ) {
+		set_post_thumbnail( $product_id, (int) $image_id );
+	}
+}
+
+function doralashab_seed_national_day_products(): void {
+	if ( '2026.1.0' === get_option( 'doralashab_national_day_catalog_version' ) || ! class_exists( 'WC_Product_Simple' ) ) {
+		return;
+	}
+
+	$category = term_exists( 'school-supplies', 'product_cat' );
+	if ( ! $category ) {
+		$category = wp_insert_term(
+			'مستلزمات مدرسية',
+			'product_cat',
+			array( 'slug' => 'school-supplies', 'description' => 'حقائب وأقلام وألوان وقرطاسيات مختارة للعام الدراسي.' )
+		);
+	}
+	$category_id = is_array( $category ) ? (int) $category['term_id'] : 0;
+
+	$products = array(
+		array( 'ND-2026-BAG', 'حقيبة هِمّة المدرسية', 'national-day-backpack.jpg', '149', '99', 'حقيبة مدرسية خفيفة ومبطنة بتقسيمات عملية ليوم أكثر ترتيباً.' ),
+		array( 'ND-2026-PENS', 'طقم أقلام وطن', 'national-day-pens.jpg', '45', '29', 'طقم من 12 قطعة يجمع أقلام الحبر والرصاص للكتابة والرسم اليومي.' ),
+		array( 'ND-2026-COLORS', 'صندوق ألوان الإبداع', 'national-day-colors.jpg', '59', '39', 'صندوق من 36 لوناً غنياً للمشاريع والواجبات الفنية.' ),
+		array( 'ND-2026-KIT', 'باقة قرطاسيتك كاملة', 'national-day-stationery.jpg', '119', '79', '16 قطعة أساسية تشمل الدفاتر والمقلمة وأدوات الكتابة والتنظيم.' ),
+		array( 'ND-2026-BUNDLE-STUDENT', 'باقة الطالب — بداية كاملة', 'national-day-stationery.jpg', '327', '199', 'حقيبة هِمّة مع باقة القرطاسية وصندوق الألوان في طلب واحد.' ),
+		array( 'ND-2026-BUNDLE-SIBLINGS', 'باقة الأشقاء — هِمّتان', 'national-day-backpack.jpg', '626', '349', 'حقيبتان وباقتا قرطاسية ومجموعتا أقلام بقيمة مضاعفة.' ),
+	);
+
+	foreach ( $products as $item ) {
+		$product_id = wc_get_product_id_by_sku( $item[0] );
+		$product    = $product_id ? wc_get_product( $product_id ) : new WC_Product_Simple();
+		if ( ! $product instanceof WC_Product_Simple ) {
+			continue;
+		}
+
+		$product->set_name( $item[1] );
+		$product->set_sku( $item[0] );
+		$product->set_status( 'publish' );
+		$product->set_catalog_visibility( 'visible' );
+		$product->set_regular_price( $item[3] );
+		$product->set_sale_price( $item[4] );
+		$product->set_date_on_sale_to( new WC_DateTime( '2026-09-23 23:59:59', wp_timezone() ) );
+		$product->set_short_description( $item[5] );
+		$product->set_description( $item[5] . ' ضمن مجموعة «هِمّة تتعلّم» الموسمية لليوم الوطني السعودي.' );
+		$product->set_stock_status( 'instock' );
+		$product->set_manage_stock( false );
+		if ( $category_id ) {
+			$product->set_category_ids( array( $category_id ) );
+		}
+		$product_id = $product->save();
+		doralashab_attach_campaign_image( $product_id, $item[2], $item[1] );
+	}
+
+	update_option( 'doralashab_national_day_catalog_version', '2026.1.0' );
+}
+add_action( 'init', 'doralashab_seed_national_day_products', 35 );
 
 function doralashab_custom_logo_attributes( array $attributes ): array {
 	$attributes['alt'] = 'شركة دور الأصحاب للنشر والتوزيع';
