@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-const DORALASHAB_THEME_VERSION = '3.0.2';
+const DORALASHAB_THEME_VERSION = '3.1.0';
 
 function doralashab_setup(): void {
 	load_theme_textdomain( 'doralashab', get_template_directory() . '/languages' );
@@ -36,6 +36,7 @@ function doralashab_menu_fallback(): void {
 	echo '<ul id="primary-menu">';
 	printf( '<li><a href="%s">الرئيسية</a></li>', esc_url( home_url( '/' ) ) );
 	printf( '<li><a href="%s">المتجر</a></li>', esc_url( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' ) ) );
+	printf( '<li><a href="%s">عروض الموسم</a></li>', esc_url( home_url( '/#seasonal-offers' ) ) );
 	echo '<li class="menu-item-has-children"><a href="' . esc_url( home_url( '/#services' ) ) . '">خدماتنا</a><ul class="sub-menu">';
 	printf( '<li><a href="%s">النشر والإنتاج المعرفي</a></li>', esc_url( home_url( '/publishing-services/' ) ) );
 	printf( '<li><a href="%s">التوزيع وتوريد الكتب</a></li>', esc_url( home_url( '/#services' ) ) );
@@ -198,7 +199,9 @@ function doralashab_social_meta(): void {
 	}
 
 	$title       = is_front_page() ? 'شركة دور الأصحاب للنشر والتوزيع' : wp_get_document_title();
-	$description = 'نشر وتوزيع وحلول مؤسسية للمعرفة، من صناعة المحتوى إلى توريد الكتب وتطوير المكتبات.';
+	$description = is_front_page()
+		? 'عروض اليوم الوطني والعودة إلى المدارس: تجهيز مكتبات المدارس، وقوائم كتب قابلة للتنزيل، واشتراك قصص دوري للأطفال.'
+		: 'نشر وتوزيع وحلول مؤسسية للمعرفة، من صناعة المحتوى إلى توريد الكتب وتطوير المكتبات.';
 	$image       = get_template_directory_uri() . '/assets/images/og-doralashab.png';
 	$url         = is_singular() ? get_permalink() : home_url( '/' );
 	?>

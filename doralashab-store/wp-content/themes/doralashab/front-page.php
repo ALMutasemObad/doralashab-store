@@ -63,33 +63,96 @@ $presence = array(
 );
 ?>
 
-<section class="da-profile-hero" aria-labelledby="home-hero-title">
-	<span class="da-profile-hero-lines da-profile-hero-lines--top" aria-hidden="true"></span>
-	<span class="da-profile-hero-lines da-profile-hero-lines--bottom" aria-hidden="true"></span>
-	<div class="da-container da-profile-hero-inner" data-reveal>
-		<?php if ( file_exists( get_template_directory() . '/assets/images/logo.png' ) ) : ?>
-			<img class="da-profile-hero-logo" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.png' ); ?>" alt="شركة دور الأصحاب للنشر والتوزيع" width="435" height="184">
-		<?php endif; ?>
-		<p class="da-profile-kicker">شركة سعودية في خدمة المعرفة</p>
-		<h1 id="home-hero-title"><span>نشر وتوزيع وحلول</span><span>مؤسسية للمعرفة</span></h1>
-		<p class="da-profile-hero-copy"><span>خبرة سعودية تجمع صناعة المحتوى وتوريد المصادر،</span><span>وتطوير المكتبات ضمن مسار مؤسسي واضح وموثوق.</span></p>
-		<div class="da-hero-actions">
-			<a class="da-button" href="<?php echo esc_url( $shop_url ); ?>">تصفح الكتب <?php doralashab_icon( 'arrow' ); ?></a>
-			<a class="da-button da-button--quiet" href="<?php echo esc_url( home_url( '/library-services/' ) ); ?>">حلول الجهات والمكتبات</a>
+<section class="da-seasonal-hero" aria-labelledby="home-hero-title">
+	<div class="da-container da-seasonal-hero-grid">
+		<div class="da-seasonal-hero-copy" data-reveal>
+			<p class="da-seasonal-eyebrow"><span>اليوم الوطني السعودي</span><i aria-hidden="true"></i><span>العودة إلى المدارس</span></p>
+			<p class="da-seasonal-brandline">نشر وتوزيع وحلول مؤسسية للمعرفة</p>
+			<h1 id="home-hero-title"><span>في موسم الوطن…</span><span>نهيّئ للمعرفة مكانها</span></h1>
+			<p>نجهّز مكتبات المدارس من قائمة الكتب حتى ترتيب الرفوف، ونقدّم للأسر اشتراكًا قصصيًا متجددًا يجعل القراءة موعدًا ينتظره الطفل.</p>
+			<div class="da-hero-actions">
+				<a class="da-button da-button--gold" href="#school-library-offer">جهّز مكتبة مدرستك <?php doralashab_icon( 'arrow' ); ?></a>
+				<a class="da-button da-button--glass" href="#story-subscription">اكتشف اشتراك القصص</a>
+			</div>
+			<ul class="da-seasonal-points" aria-label="أبرز خدمات الموسم">
+				<li><?php doralashab_icon( 'catalog' ); ?><span><strong>اختيار منظّم</strong><small>قوائم كتب بصيغة Excel</small></span></li>
+				<li><?php doralashab_icon( 'library' ); ?><span><strong>تجهيز متكامل</strong><small>فهرسة وتصنيف وترتيب</small></span></li>
+				<li><?php doralashab_icon( 'book' ); ?><span><strong>قراءة مستمرة</strong><small>قصص تصل إلى الأسرة دوريًا</small></span></li>
+			</ul>
 		</div>
-		<ul class="da-hero-sectors" aria-label="القطاعات التي تخدمها الشركة">
-			<?php foreach ( $sectors as $sector ) : ?>
-				<li><span><?php doralashab_icon( $sector[0] ); ?></span><strong><?php echo esc_html( $sector[1] ); ?></strong></li>
-			<?php endforeach; ?>
-		</ul>
+		<div class="da-seasonal-hero-visual" data-reveal>
+			<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/school-library-season.png' ); ?>" alt="مكتبة مدرسية مجهزة ومنظمة" width="1672" height="940" fetchpriority="high">
+			<div class="da-seasonal-hero-card da-seasonal-hero-card--school"><span>للمدارس</span><strong>من قائمة الكتب إلى مكتبة جاهزة</strong></div>
+			<div class="da-seasonal-hero-card da-seasonal-hero-card--family"><span>للأسرة</span><strong>قصة جديدة… وموعد جديد مع القراءة</strong></div>
+		</div>
 	</div>
-	<div class="da-saudi-band">
+	<div class="da-saudi-band da-saudi-band--seasonal">
 		<div class="da-container">
-			<div class="da-saudi-band-copy"><span>جذور سعودية</span><strong>نخدم المعرفة بما يواكب طموح المملكة</strong></div>
+			<div class="da-saudi-band-copy"><span>معرفة تمتد… وأثر يبقى</span><strong>نحتفي بالوطن بما نصنعه لأجياله</strong></div>
 			<?php if ( file_exists( get_template_directory() . '/assets/images/vision-2030.png' ) ) : ?>
 				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/vision-2030.png' ); ?>" alt="رؤية السعودية 2030" loading="eager">
 			<?php endif; ?>
 		</div>
+	</div>
+</section>
+
+<section class="da-section da-seasonal-offers" id="seasonal-offers" aria-labelledby="seasonal-offers-title">
+	<div class="da-container">
+		<div class="da-section-heading da-section-heading--center" data-reveal>
+			<p class="da-kicker">عروض الموسم</p>
+			<h2 id="seasonal-offers-title">مساران… وغاية واحدة: أن يصبح الكتاب جزءًا من كل يوم</h2>
+			<p>حل مؤسسي للمدرسة، وتجربة قراءة متجددة للأسرة؛ بصياغة عملية تبدأ بالاختيار وتنتهي بأثر يمكن رؤيته.</p>
+		</div>
+
+		<article class="da-seasonal-offer da-seasonal-offer--school" id="school-library-offer" data-reveal>
+			<div class="da-seasonal-offer-media">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/school-library-season.png' ); ?>" alt="مكتبة مدرسية مرتبة وجاهزة للاستخدام" width="1672" height="940" loading="lazy">
+				<span>عرض اليوم الوطني للمدارس</span>
+			</div>
+			<div class="da-seasonal-offer-copy">
+				<p class="da-offer-audience">للمدارس والجهات التعليمية</p>
+				<h3>مكتبة تُبنى على احتياجكم، وتُسلَّم جاهزة للقراءة</h3>
+				<p class="da-offer-lead">نضع بين أيديكم ملفًا واضحًا لقوائم الكتب. تختار المدرسة العناوين والكميات، ثم نتولى التوريد والتجهيز الفني وفق نطاق العمل المعتمد.</p>
+				<div class="da-offer-flow" aria-label="خطوات طلب مكتبة مدرسية">
+					<span><b>01</b><strong>حمّلوا القائمة</strong><small>ملف Excel منظم وسهل التعبئة</small></span>
+					<span><b>02</b><strong>حدّدوا الاختيار</strong><small>العناوين والكميات والخدمات</small></span>
+					<span><b>03</b><strong>استلموا مكتبتكم</strong><small>توريد وتجهيز وترتيب وفق الاتفاق</small></span>
+				</div>
+				<ul class="da-offer-services">
+					<li><?php doralashab_icon( 'check' ); ?> توريد الكتب المختارة</li>
+					<li><?php doralashab_icon( 'check' ); ?> الفهرسة والتصنيف</li>
+					<li><?php doralashab_icon( 'check' ); ?> الترميز وملصقات الكعب</li>
+					<li><?php doralashab_icon( 'check' ); ?> ترتيب الكتب على الرفوف</li>
+				</ul>
+				<div class="da-offer-actions">
+					<a class="da-button" href="<?php echo esc_url( get_template_directory_uri() . '/assets/files/school-library-book-selection.xlsx' ); ?>" download="قائمة-اختيار-كتب-المكتبة-المدرسية.xlsx"><?php doralashab_icon( 'document' ); ?> تحميل قائمة الكتب Excel</a>
+					<a class="da-text-link" href="mailto:alas3hab@gmail.com?subject=%D8%B7%D9%84%D8%A8%20%D8%AA%D9%88%D8%B1%D9%8A%D8%AF%20%D9%88%D8%AA%D8%AC%D9%87%D9%8A%D8%B2%20%D9%85%D9%83%D8%AA%D8%A8%D8%A9%20%D9%85%D8%AF%D8%B1%D8%B3%D9%8A%D8%A9&amp;body=%D8%AA%D9%85%20%D8%A5%D8%B1%D9%81%D8%A7%D9%82%20%D9%82%D8%A7%D8%A6%D9%85%D8%A9%20%D8%A7%D9%84%D9%83%D8%AA%D8%A8%20%D8%A8%D8%B9%D8%AF%20%D8%AA%D8%B9%D8%A8%D8%A6%D8%AA%D9%87%D8%A7.">أرسلوا القائمة بعد تعبئتها <?php doralashab_icon( 'arrow' ); ?></a>
+				</div>
+				<small class="da-offer-note">يمكن طلب التوريد فقط، أو إضافة خدمات الفهرسة والتصنيف والترميز والترتيب بحسب احتياج المدرسة.</small>
+			</div>
+		</article>
+
+		<article class="da-seasonal-offer da-seasonal-offer--family" id="story-subscription" data-reveal>
+			<div class="da-seasonal-offer-media">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/children-learning-v2.webp' ); ?>" alt="أطفال يستمتعون بقراءة القصص" width="1400" height="933" loading="lazy">
+				<span>عرض العودة إلى المدارس للأسر</span>
+			</div>
+			<div class="da-seasonal-offer-copy">
+				<p class="da-offer-audience">لأولياء الأمور</p>
+				<h3>اشتراكٌ يجعل للقراءة موعدًا ينتظره طفلكم</h3>
+				<p class="da-offer-lead">قصص تُختار بما يلائم عمر الطفل واهتماماته، وتصل إلى المنزل بصورة دورية؛ لتتجدد مكتبته، وتتسع لغته وخياله، وتتحول القراءة إلى عادة محببة.</p>
+				<div class="da-story-pillars">
+					<span><?php doralashab_icon( 'target' ); ?><strong>اختيار ملائم</strong><small>بحسب العمر والاهتمامات</small></span>
+					<span><?php doralashab_icon( 'boxes' ); ?><strong>وصول دوري</strong><small>قصص متجددة وفق الباقة</small></span>
+					<span><?php doralashab_icon( 'leaf' ); ?><strong>أثر متراكم</strong><small>مكتبة تنمو مع الطفل</small></span>
+				</div>
+				<blockquote>ليست الفكرة أن نضيف كتابًا آخر إلى الرف، بل أن نصنع علاقة تتجدد مع كل قصة.</blockquote>
+				<div class="da-offer-actions">
+					<a class="da-button da-button--family" href="mailto:alas3hab@gmail.com?subject=%D8%A7%D9%87%D8%AA%D9%85%D8%A7%D9%85%20%D8%A8%D8%A7%D8%B4%D8%AA%D8%B1%D8%A7%D9%83%20%D9%82%D8%B5%D8%B5%20%D8%A7%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84&amp;body=%D8%B9%D9%85%D8%B1%20%D8%A7%D9%84%D8%B7%D9%81%D9%84%3A%0A%D8%A7%D9%84%D8%A7%D9%87%D8%AA%D9%85%D8%A7%D9%85%D8%A7%D8%AA%3A%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A">سجّلوا اهتمامكم بالاشتراك <?php doralashab_icon( 'arrow' ); ?></a>
+					<a class="da-text-link" href="<?php echo esc_url( home_url( '/childrens-books/' ) ); ?>">تصفحوا كتب الأطفال</a>
+				</div>
+			</div>
+		</article>
 	</div>
 </section>
 

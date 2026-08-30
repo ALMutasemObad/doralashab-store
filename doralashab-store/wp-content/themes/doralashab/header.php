@@ -10,6 +10,15 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <a class="skip-link screen-reader-text" href="#main-content">تجاوز إلى المحتوى</a>
+<div class="da-seasonal-bar">
+	<div class="da-container">
+		<p><span aria-hidden="true">🇸🇦</span> موسم الوطن والعودة إلى المدارس</p>
+		<nav aria-label="عروض الموسم">
+			<a href="<?php echo esc_url( home_url( '/#school-library-offer' ) ); ?>">تجهيز مكتبات المدارس</a>
+			<a href="<?php echo esc_url( home_url( '/#story-subscription' ) ); ?>">اشتراك القصص للأطفال</a>
+		</nav>
+	</div>
+</div>
 <header class="site-header">
 	<div class="da-container site-branding-row">
 		<div class="site-branding">
@@ -39,7 +48,7 @@
 	<div class="da-container">
 		<button class="da-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu"><span aria-hidden="true">☰</span> القائمة</button>
 		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_id' => 'primary-menu', 'fallback_cb' => 'doralashab_menu_fallback' ) ); ?>
-		<a class="da-header-cta" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">ناقش احتياج جهتك</a>
+		<a class="da-header-cta" href="<?php echo esc_url( home_url( '/#seasonal-offers' ) ); ?>">عروض الموسم</a>
 	</div>
 </nav>
 <main id="main-content" class="site-main">
