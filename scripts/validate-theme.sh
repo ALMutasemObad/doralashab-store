@@ -60,7 +60,10 @@ if grep -Eq 'max\([[:space:]]*23|عنوانًا متاحًا الآن' "$theme_d
 fi
 
 while IFS= read -r -d '' php_file; do
-  php -l "$php_file" >/dev/null
+	if ! php -l "$php_file"; then
+		echo "PHP syntax validation failed: $php_file" >&2
+		exit 1
+	fi
 done < <(find "$theme_dir" -type f -name '*.php' -print0)
 
 if find "$theme_dir" -type f \( -name '.env*' -o -name '*.pem' -o -name '*.key' -o -name '*.p12' \) -print -quit | grep -q .; then
