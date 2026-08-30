@@ -85,6 +85,7 @@ $presence = array(
 	<span class="da-national-hero-pattern" aria-hidden="true"></span>
 	<div class="da-container da-national-hero-grid">
 		<div class="da-national-hero-copy" data-reveal>
+			<p class="da-national-brandline">شركة دور الأصحاب للنشر والتوزيع</p>
 			<p class="da-national-eyebrow"><span>عروض اليوم الوطني</span><b>93</b></p>
 			<h1 id="home-hero-title"><span>هِمّة</span> تتعلّم</h1>
 			<p class="da-national-lead">نحتفل بوطنٍ يعلو بالعلم، ونجهّز أبناءه لبداية مدرسية تليق بطموحهم.</p>
