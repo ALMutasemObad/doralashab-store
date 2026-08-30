@@ -66,7 +66,7 @@ require_exact_line "DORALASHAB_THEME_DEPLOY_ROOT_V1" "$theme_dir/.doralashab-the
 require_text "const DORALASHAB_THEME_VERSION" "$theme_dir/functions.php"
 require_text "شركة دور الأصحاب للنشر والتوزيع" "$theme_dir/front-page.php"
 require_text "نشر وتوزيع وحلول" "$theme_dir/front-page.php"
-require_text "هِمّة تتعلّم" "$theme_dir/front-page.php"
+require_text '<h1 id="home-hero-title"><span>هِمّة</span> تتعلّم</h1>' "$theme_dir/front-page.php"
 require_text "alas3hab@gmail.com" "$theme_dir/footer.php"
 
 if grep -Fq "مكتبة الملك عبد" "$theme_dir/front-page.php"; then
