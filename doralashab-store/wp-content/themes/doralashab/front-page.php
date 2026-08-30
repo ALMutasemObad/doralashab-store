@@ -67,7 +67,7 @@ $presence = array(
 	<div class="da-container da-seasonal-hero-grid">
 		<div class="da-seasonal-hero-copy" data-reveal>
 			<p class="da-seasonal-eyebrow"><span>اليوم الوطني السعودي</span><i aria-hidden="true"></i><span>العودة إلى المدارس</span></p>
-			<p class="da-seasonal-brandline">نشر وتوزيع وحلول مؤسسية للمعرفة</p>
+			<p class="da-seasonal-brandline">شركة دور الأصحاب للنشر والتوزيع | نشر وتوزيع وحلول مؤسسية للمعرفة</p>
 			<h1 id="home-hero-title"><span>في موسم الوطن…</span><span>نهيّئ للمعرفة مكانها</span></h1>
 			<p>نجهّز مكتبات المدارس من قائمة الكتب حتى ترتيب الرفوف، ونقدّم للأسر اشتراكًا قصصيًا متجددًا يجعل القراءة موعدًا ينتظره الطفل.</p>
 			<div class="da-hero-actions">
