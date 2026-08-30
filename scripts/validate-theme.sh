@@ -41,13 +41,33 @@ for file in "${required_files[@]}"; do
   fi
 done
 
-grep -Fq "Theme Name: دور الأصحاب" "$theme_dir/style.css"
-grep -Fxq "DORALASHAB_THEME_DEPLOY_ROOT_V1" "$theme_dir/.doralashab-theme-root"
-grep -Fq "const DORALASHAB_THEME_VERSION" "$theme_dir/functions.php"
-grep -Fq "شركة دور الأصحاب للنشر والتوزيع" "$theme_dir/front-page.php"
-grep -Fq "نشر وتوزيع وحلول" "$theme_dir/front-page.php"
-grep -Fq "هِمّة تتعلّم" "$theme_dir/front-page.php"
-grep -Fq "alas3hab@gmail.com" "$theme_dir/footer.php"
+require_text() {
+  local needle="$1"
+  local file="$2"
+
+  if ! grep -Fq -- "$needle" "$file"; then
+    echo "Required text is missing from ${file#"$repo_root/"}: $needle" >&2
+    exit 1
+  fi
+}
+
+require_exact_line() {
+  local expected="$1"
+  local file="$2"
+
+  if ! grep -Fxq -- "$expected" "$file"; then
+    echo "Required marker is missing from ${file#"$repo_root/"}: $expected" >&2
+    exit 1
+  fi
+}
+
+require_text "Theme Name: دور الأصحاب" "$theme_dir/style.css"
+require_exact_line "DORALASHAB_THEME_DEPLOY_ROOT_V1" "$theme_dir/.doralashab-theme-root"
+require_text "const DORALASHAB_THEME_VERSION" "$theme_dir/functions.php"
+require_text "شركة دور الأصحاب للنشر والتوزيع" "$theme_dir/front-page.php"
+require_text "نشر وتوزيع وحلول" "$theme_dir/front-page.php"
+require_text "هِمّة تتعلّم" "$theme_dir/front-page.php"
+require_text "alas3hab@gmail.com" "$theme_dir/footer.php"
 
 if grep -Fq "مكتبة الملك عبد" "$theme_dir/front-page.php"; then
   echo "An unverified institution remains in the public homepage." >&2
