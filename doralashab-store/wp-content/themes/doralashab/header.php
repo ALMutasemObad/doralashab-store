@@ -10,6 +10,11 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <a class="skip-link screen-reader-text" href="#main-content">تجاوز إلى المحتوى</a>
+<?php if ( is_front_page() ) : ?>
+	<div class="da-national-ribbon">
+		<div class="da-container"><b>عروض اليوم الوطني</b><span>خصومات تصل إلى 36٪ على المستلزمات المدرسية</span><a href="#national-day-products">تسوّق الآن</a></div>
+	</div>
+<?php endif; ?>
 <header class="site-header">
 	<div class="da-container site-branding-row">
 		<div class="site-branding">
@@ -39,7 +44,11 @@
 	<div class="da-container">
 		<button class="da-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu"><span aria-hidden="true">☰</span> القائمة</button>
 		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_id' => 'primary-menu', 'fallback_cb' => 'doralashab_menu_fallback' ) ); ?>
-		<a class="da-header-cta" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">ناقش احتياج جهتك</a>
+		<?php if ( is_front_page() ) : ?>
+			<a class="da-header-cta" href="#national-day-offers">عروض اليوم الوطني</a>
+		<?php else : ?>
+			<a class="da-header-cta" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">ناقش احتياج جهتك</a>
+		<?php endif; ?>
 	</div>
 </nav>
 <main id="main-content" class="site-main">
