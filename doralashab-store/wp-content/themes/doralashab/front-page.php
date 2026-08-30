@@ -9,30 +9,12 @@ if ( class_exists( 'WooCommerce' ) ) {
 	$latest   = wc_get_products(
 		array(
 			'status'  => 'publish',
-			'limit'   => 12,
+			'limit'   => 8,
 			'orderby' => 'date',
 			'order'   => 'DESC',
 		)
 	);
-	$latest = array_values(
-		array_filter(
-			$latest,
-			static fn( $item ) => 0 !== strpos( (string) $item->get_sku(), 'ND-2026-' )
-		)
-	);
-	$latest = array_slice( $latest, 0, 8 );
 }
-
-$campaign_products = array(
-	array( 'ND-2026-BAG', 'حقيبة هِمّة المدرسية', 'حقيبة يومية', 'national-day-backpack.jpg', 149, 99, 'خصم 34٪', 'خفيفة، مبطنة، ومصممة ليوم دراسي أكثر ترتيباً.' ),
-	array( 'ND-2026-PENS', 'طقم أقلام وطن', '12 قطعة', 'national-day-pens.jpg', 45, 29, 'خصم 36٪', 'أقلام حبر ورصاص مختارة للكتابة والرسم اليومي.' ),
-	array( 'ND-2026-COLORS', 'صندوق ألوان الإبداع', '36 لوناً', 'national-day-colors.jpg', 59, 39, 'خصم 34٪', 'ألوان غنية وسهلة الاستخدام للمشاريع والواجبات الفنية.' ),
-	array( 'ND-2026-KIT', 'باقة قرطاسيتك كاملة', '16 قطعة', 'national-day-stationery.jpg', 119, 79, 'خصم 34٪', 'دفاتر ومقلمة وأدوات تنظيم أساسية في باقة واحدة.' ),
-);
-$student_bundle_id  = function_exists( 'wc_get_product_id_by_sku' ) ? wc_get_product_id_by_sku( 'ND-2026-BUNDLE-STUDENT' ) : 0;
-$siblings_bundle_id = function_exists( 'wc_get_product_id_by_sku' ) ? wc_get_product_id_by_sku( 'ND-2026-BUNDLE-SIBLINGS' ) : 0;
-$student_bundle     = $student_bundle_id ? wc_get_product( $student_bundle_id ) : false;
-$siblings_bundle    = $siblings_bundle_id ? wc_get_product( $siblings_bundle_id ) : false;
 
 $sectors = array(
 	array( 'library', 'مكتبات عامة', 'تنمية المجموعات وتنظيمها وتحسين الوصول إلى مصادر المعرفة.' ),
@@ -81,129 +63,33 @@ $presence = array(
 );
 ?>
 
-<section class="da-national-hero" aria-labelledby="home-hero-title">
-	<span class="da-national-hero-pattern" aria-hidden="true"></span>
-	<div class="da-container da-national-hero-grid">
-		<div class="da-national-hero-copy" data-reveal>
-			<p class="da-national-brandline">شركة دور الأصحاب للنشر والتوزيع</p>
-			<p class="da-national-eyebrow"><span>عروض اليوم الوطني</span><b>93</b></p>
-			<h1 id="home-hero-title"><span>هِمّة</span> تتعلّم</h1>
-			<p class="da-national-lead">نحتفل بوطنٍ يعلو بالعلم، ونجهّز أبناءه لبداية مدرسية تليق بطموحهم.</p>
-			<div class="da-national-benefits" aria-label="مزايا العرض">
-				<span><?php doralashab_icon( 'quality' ); ?> خصومات حتى 36٪</span>
-				<span><?php doralashab_icon( 'boxes' ); ?> باقات جاهزة للمدرسة</span>
-			</div>
-			<div class="da-hero-actions">
-				<a class="da-button da-button--gold" href="#national-day-products">تسوّق المجموعة <?php doralashab_icon( 'arrow' ); ?></a>
-				<a class="da-button da-button--glass" href="#national-day-offers">شاهد الباقات</a>
-			</div>
-			<div class="da-countdown-wrap" data-campaign-countdown data-target="2026-09-23T23:59:59+03:00" aria-label="الوقت المتبقي لنهاية عروض اليوم الوطني">
-				<p>العرض ينتهي خلال</p>
-				<div class="da-countdown" aria-live="polite">
-					<span><strong data-days>00</strong><small>يوم</small></span>
-					<i>:</i>
-					<span><strong data-hours>00</strong><small>ساعة</small></span>
-					<i>:</i>
-					<span><strong data-minutes>00</strong><small>دقيقة</small></span>
-					<i>:</i>
-					<span><strong data-seconds>00</strong><small>ثانية</small></span>
-				</div>
-			</div>
+<section class="da-profile-hero" aria-labelledby="home-hero-title">
+	<span class="da-profile-hero-lines da-profile-hero-lines--top" aria-hidden="true"></span>
+	<span class="da-profile-hero-lines da-profile-hero-lines--bottom" aria-hidden="true"></span>
+	<div class="da-container da-profile-hero-inner" data-reveal>
+		<?php if ( file_exists( get_template_directory() . '/assets/images/logo.png' ) ) : ?>
+			<img class="da-profile-hero-logo" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.png' ); ?>" alt="شركة دور الأصحاب للنشر والتوزيع" width="435" height="184">
+		<?php endif; ?>
+		<p class="da-profile-kicker">شركة سعودية في خدمة المعرفة</p>
+		<h1 id="home-hero-title"><span>نشر وتوزيع وحلول</span><span>مؤسسية للمعرفة</span></h1>
+		<p class="da-profile-hero-copy"><span>خبرة سعودية تجمع صناعة المحتوى وتوريد المصادر،</span><span>وتطوير المكتبات ضمن مسار مؤسسي واضح وموثوق.</span></p>
+		<div class="da-hero-actions">
+			<a class="da-button" href="<?php echo esc_url( $shop_url ); ?>">تصفح الكتب <?php doralashab_icon( 'arrow' ); ?></a>
+			<a class="da-button da-button--quiet" href="<?php echo esc_url( home_url( '/library-services/' ) ); ?>">حلول الجهات والمكتبات</a>
 		</div>
-		<div class="da-national-hero-visual" data-reveal>
-			<div class="da-national-image-frame">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/national-day-campaign.jpg' ); ?>" alt="مجموعة همة تتعلم من الحقائب والأقلام والألوان والقرطاسيات" width="1600" height="900" fetchpriority="high">
-				<span class="da-floating-discount"><b>حتى</b><strong>36٪</strong><small>خصم</small></span>
-			</div>
-			<div class="da-national-proof"><span><?php doralashab_icon( 'school' ); ?></span><p><small>من البيت إلى المدرسة</small><strong>كل ما يحتاجه الطالب في مكان واحد</strong></p></div>
-		</div>
-	</div>
-	<div class="da-national-marquee" aria-label="رسالة الحملة">
-		<div><span>همة تتعلّم</span><i>✦</i><span>أسعار وطنية</span><i>✦</i><span>اختيارات مدرسية أذكى</span><i>✦</i><span>نشر وتوزيع وحلول معرفية سعودية</span></div>
-	</div>
-</section>
-
-<section class="da-section da-national-products" id="national-day-products" aria-labelledby="national-products-title">
-	<div class="da-container">
-		<div class="da-national-section-heading" data-reveal>
-			<div><p class="da-kicker">مجموعة العام الدراسي</p><h2 id="national-products-title">اختيارات صغيرة،<br><span>لطموحاتٍ كبيرة.</span></h2></div>
-			<div><p>منتجات مدرسية عملية بهوية وطنية أنيقة، وأسعار صممت لتجعل العودة إلى المدرسة أسهل.</p><a class="da-text-link" href="<?php echo esc_url( $shop_url ); ?>">استكشف المتجر كاملاً <?php doralashab_icon( 'arrow' ); ?></a></div>
-		</div>
-		<div class="da-campaign-product-grid">
-			<?php foreach ( $campaign_products as $index => $campaign_product ) : ?>
-				<?php
-				$product_id = function_exists( 'wc_get_product_id_by_sku' ) ? wc_get_product_id_by_sku( $campaign_product[0] ) : 0;
-				$product    = $product_id ? wc_get_product( $product_id ) : false;
-				?>
-				<article class="da-campaign-product" data-reveal>
-					<a class="da-campaign-product-media" href="<?php echo esc_url( $product ? $product->get_permalink() : $shop_url ); ?>">
-						<span class="da-campaign-badge"><?php echo esc_html( $campaign_product[6] ); ?></span>
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/' . $campaign_product[3] ); ?>" alt="<?php echo esc_attr( $campaign_product[1] ); ?>" width="900" height="900" loading="lazy">
-					</a>
-					<div class="da-campaign-product-body">
-						<span class="da-campaign-product-meta"><?php echo esc_html( $campaign_product[2] ); ?></span>
-						<h3><a href="<?php echo esc_url( $product ? $product->get_permalink() : $shop_url ); ?>"><?php echo esc_html( $campaign_product[1] ); ?></a></h3>
-						<p><?php echo esc_html( $campaign_product[7] ); ?></p>
-						<div class="da-campaign-product-footer">
-							<div class="da-campaign-price"><del><?php echo esc_html( $campaign_product[4] ); ?> ر.س</del><strong><?php echo esc_html( $campaign_product[5] ); ?> <small>ر.س</small></strong></div>
-							<?php if ( $product && $product->is_purchasable() && $product->is_in_stock() ) : ?>
-								<a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>" data-quantity="1" data-product_id="<?php echo esc_attr( $product_id ); ?>" class="da-campaign-add add_to_cart_button ajax_add_to_cart" rel="nofollow" aria-label="أضف <?php echo esc_attr( $campaign_product[1] ); ?> إلى السلة"><?php doralashab_icon( 'cart' ); ?><span>أضف</span></a>
-							<?php else : ?>
-								<a class="da-campaign-add" href="<?php echo esc_url( $shop_url ); ?>" aria-label="تسوق <?php echo esc_attr( $campaign_product[1] ); ?>"><?php doralashab_icon( 'arrow' ); ?><span>تسوّق</span></a>
-							<?php endif; ?>
-						</div>
-					</div>
-				</article>
+		<ul class="da-hero-sectors" aria-label="القطاعات التي تخدمها الشركة">
+			<?php foreach ( $sectors as $sector ) : ?>
+				<li><span><?php doralashab_icon( $sector[0] ); ?></span><strong><?php echo esc_html( $sector[1] ); ?></strong></li>
 			<?php endforeach; ?>
-		</div>
+		</ul>
 	</div>
-</section>
-
-<section class="da-section da-national-offers" id="national-day-offers" aria-labelledby="national-offers-title">
-	<div class="da-container">
-		<div class="da-national-offers-intro" data-reveal>
-			<p class="da-kicker da-kicker--light">وفّر أكثر مع الباقات</p>
-			<h2 id="national-offers-title">عرضٌ لكل بداية</h2>
-			<p>من طالبٍ واحد إلى فصلٍ كامل، جهّز احتياجك بسعر واضح وخيارات قابلة للتوسع.</p>
+	<div class="da-saudi-band">
+		<div class="da-container">
+			<div class="da-saudi-band-copy"><span>جذور سعودية</span><strong>نخدم المعرفة بما يواكب طموح المملكة</strong></div>
+			<?php if ( file_exists( get_template_directory() . '/assets/images/vision-2030.png' ) ) : ?>
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/vision-2030.png' ); ?>" alt="رؤية السعودية 2030" loading="eager">
+			<?php endif; ?>
 		</div>
-		<div class="da-offer-cards">
-			<article class="da-offer-card" data-reveal>
-				<span class="da-offer-label">الأكثر طلباً</span>
-				<p class="da-offer-kicker">باقة الطالب</p>
-				<h3>بداية كاملة</h3>
-				<p>حقيبة هِمّة + باقة القرطاسية + صندوق الألوان</p>
-				<div class="da-offer-price"><del>327 ر.س</del><strong>199 <small>ر.س</small></strong></div>
-				<span class="da-offer-saving">وفّر 128 ر.س</span>
-				<?php if ( $student_bundle ) : ?>
-					<a class="da-button add_to_cart_button ajax_add_to_cart" data-quantity="1" data-product_id="<?php echo esc_attr( $student_bundle_id ); ?>" href="<?php echo esc_url( $student_bundle->add_to_cart_url() ); ?>">أضف الباقة للسلة <?php doralashab_icon( 'cart' ); ?></a>
-				<?php else : ?>
-					<a class="da-button" href="#national-day-products">تسوّق مكونات الباقة <?php doralashab_icon( 'arrow' ); ?></a>
-				<?php endif; ?>
-			</article>
-			<article class="da-offer-card da-offer-card--featured" data-reveal>
-				<span class="da-offer-label">قيمة مضاعفة</span>
-				<p class="da-offer-kicker">باقة الأشقاء</p>
-				<h3>هِمّتان في بيت واحد</h3>
-				<p>حقيبتان + باقتا قرطاسية + مجموعتا أقلام</p>
-				<div class="da-offer-price"><del>626 ر.س</del><strong>349 <small>ر.س</small></strong></div>
-				<span class="da-offer-saving">وفّر 277 ر.س</span>
-				<?php if ( $siblings_bundle ) : ?>
-					<a class="da-button da-button--gold add_to_cart_button ajax_add_to_cart" data-quantity="1" data-product_id="<?php echo esc_attr( $siblings_bundle_id ); ?>" href="<?php echo esc_url( $siblings_bundle->add_to_cart_url() ); ?>">أضف باقة الأشقاء <?php doralashab_icon( 'cart' ); ?></a>
-				<?php else : ?>
-					<a class="da-button da-button--gold" href="#national-day-products">تسوّق مكونات الباقة <?php doralashab_icon( 'arrow' ); ?></a>
-				<?php endif; ?>
-			</article>
-			<article class="da-offer-card da-offer-card--schools" data-reveal>
-				<span class="da-offer-label">للمدارس</span>
-				<p class="da-offer-kicker">تجهيز الفصول</p>
-				<h3>30 طالباً، طلب واحد</h3>
-				<p>تجهيز مرن للحقائب والقرطاسيات مع خدمة توريد للجهات.</p>
-				<div class="da-offer-price"><span>يبدأ من</span><strong>4,990 <small>ر.س</small></strong></div>
-				<span class="da-offer-saving">عرض سعر خلال يوم عمل</span>
-				<a class="da-button da-button--light" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">اطلب عرض المدرسة <?php doralashab_icon( 'arrow' ); ?></a>
-			</article>
-		</div>
-		<p class="da-offer-note" data-reveal>* تسري العروض حتى نهاية 23 سبتمبر 2026 أو حتى نفاد الكمية. الأسعار تشمل ضريبة القيمة المضافة.</p>
 	</div>
 </section>
 

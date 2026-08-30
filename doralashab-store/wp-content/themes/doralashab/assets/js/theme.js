@@ -61,44 +61,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
   },{passive:true});
 
-  const countdown=document.querySelector('[data-campaign-countdown]');
-  if(countdown){
-    const target=new Date(countdown.dataset.target).getTime();
-    const fields={
-      days:countdown.querySelector('[data-days]'),
-      hours:countdown.querySelector('[data-hours]'),
-      minutes:countdown.querySelector('[data-minutes]'),
-      seconds:countdown.querySelector('[data-seconds]')
-    };
-    const pad=value=>String(Math.max(0,value)).padStart(2,'0');
-    let timer;
-    const renderCountdown=()=>{
-      const remaining=Math.max(0,target-Date.now());
-      const days=Math.floor(remaining/86400000);
-      const hours=Math.floor((remaining%86400000)/3600000);
-      const minutes=Math.floor((remaining%3600000)/60000);
-      const seconds=Math.floor((remaining%60000)/1000);
-      fields.days.textContent=pad(days);
-      fields.hours.textContent=pad(hours);
-      fields.minutes.textContent=pad(minutes);
-      fields.seconds.textContent=pad(seconds);
-      if(!remaining){
-        countdown.classList.add('is-ended');
-        const label=countdown.querySelector(':scope > p');
-        if(label)label.textContent='انتهى العرض الموسمي';
-        if(timer)window.clearInterval(timer);
-      }
-    };
-    renderCountdown();
-    timer=window.setInterval(renderCountdown,1000);
-  }
-
-  if(window.jQuery){
-    window.jQuery(document.body).on('added_to_cart',(_event,_fragments,_hash,button)=>{
-      if(button?.hasClass('da-campaign-add'))button.find('span').text('تمت الإضافة');
-    });
-  }
-
   const items=document.querySelectorAll('[data-reveal]');
   if(!items.length)return;
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){

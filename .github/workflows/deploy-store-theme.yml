@@ -143,10 +143,7 @@ jobs:
           public_html="$(curl --fail --silent --show-error --location --retry 3 "$SITE_URL/?deployed=${GITHUB_SHA}")"
           grep -F "شركة دور الأصحاب للنشر والتوزيع" <<<"$public_html" >/dev/null
           grep -F "نشر وتوزيع وحلول" <<<"$public_html" >/dev/null
-          grep -F "هِمّة تتعلّم" <<<"$public_html" >/dev/null
           curl --fail --silent --show-error --head --retry 3 "$SITE_URL/wp-content/themes/doralashab/assets/css/v2.css?v=${GITHUB_SHA}" >/dev/null
           curl --fail --silent --show-error --head --retry 3 "$SITE_URL/wp-content/themes/doralashab/assets/css/v3.css?v=${GITHUB_SHA}" >/dev/null
-          curl --fail --silent --show-error --head --retry 3 "$SITE_URL/wp-content/themes/doralashab/assets/css/national-day.css?v=${GITHUB_SHA}" >/dev/null
-          curl --fail --silent --show-error --head --retry 3 "$SITE_URL/wp-content/themes/doralashab/assets/images/national-day-campaign.jpg?v=${GITHUB_SHA}" >/dev/null
           curl --fail --silent --show-error --head --retry 3 "$SITE_URL/wp-content/themes/doralashab/assets/images/og-doralashab.png?v=${GITHUB_SHA}" >/dev/null
           curl --fail --silent --show-error --head --retry 3 "$SITE_URL/wp-content/themes/doralashab/assets/images/favicon.svg?v=${GITHUB_SHA}" >/dev/null
