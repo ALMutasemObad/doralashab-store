@@ -3,8 +3,6 @@ defined( 'ABSPATH' ) || exit;
 
 const DORALASHAB_THEME_VERSION = '3.2.3';
 
-require_once get_template_directory() . '/inc/catalog-publish-2026-08-31.php';
-
 function doralashab_setup(): void {
 	load_theme_textdomain( 'doralashab', get_template_directory() . '/languages' );
 	add_theme_support( 'title-tag' );
