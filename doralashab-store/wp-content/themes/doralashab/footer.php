@@ -8,7 +8,7 @@ if ( function_exists( 'is_cart' ) && ( is_cart() || is_checkout() || is_account_
 <?php if ( $show_project_cta ) : ?>
 	<section class="da-cta" aria-labelledby="footer-cta-title">
 		<div class="da-container">
-			<div><span class="da-cta-kicker">ابدأ من احتياجك</span><h2 id="footer-cta-title">لنبدأ مشروع المعرفة التالي</h2><p>للنشر، أو توريد الكتب، أو حلول المكتبات والمؤسسات؛ نبني معك المسار المناسب.</p></div>
+			<div><h2 id="footer-cta-title">لنبدأ مشروع المعرفة التالي</h2><span class="da-cta-kicker">ابدأ من احتياجك</span><p>للنشر، أو توريد الكتب، أو حلول المكتبات والمؤسسات؛ نبني معك المسار المناسب.</p></div>
 			<a class="da-button" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">ناقش مشروعك معنا <?php doralashab_icon( 'arrow' ); ?></a>
 		</div>
 	</section>

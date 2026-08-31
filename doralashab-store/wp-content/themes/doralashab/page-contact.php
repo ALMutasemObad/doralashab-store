@@ -3,8 +3,8 @@
 <section class="da-inner-hero da-inner-hero--paper da-contact-hero" aria-labelledby="contact-title">
 	<div class="da-container da-inner-hero-layout">
 		<div data-reveal>
-			<p class="da-kicker">تواصل معنا</p>
 			<h1 id="contact-title"><span>لنبدأ مشروع المعرفة</span><span>التالي</span></h1>
+			<p class="da-kicker">تواصل معنا</p>
 			<p>للنشر، أو توريد الكتب، أو حلول المكتبات والمؤسسات؛ ابدأ باحتياجك وسنبني معه المسار المناسب.</p>
 		</div>
 		<div class="da-contact-hero-note" data-reveal><span><?php doralashab_icon( 'document' ); ?></span><strong>رسالة واضحة تختصر الطريق</strong><p>اذكر نوع المشروع والجهة والخدمة المطلوبة، وسيتواصل معك الفريق لمناقشة الخطوة التالية.</p></div>
@@ -24,7 +24,7 @@
 
 <section class="da-section da-contact-projects">
 	<div class="da-container">
-		<div class="da-section-heading" data-reveal><div><p class="da-kicker">كيف يمكننا مساعدتك؟</p><h2>اختر نقطة البداية الأقرب لاحتياجك</h2></div><p>يمكن أن يبدأ التواصل بفكرة كتاب، أو قائمة توريد، أو احتياج مكتبة ومشروع مؤسسي.</p></div>
+		<div class="da-section-heading" data-reveal><div><h2>اختر نقطة البداية الأقرب لاحتياجك</h2><p class="da-kicker">كيف يمكننا مساعدتك؟</p></div><p>يمكن أن يبدأ التواصل بفكرة كتاب، أو قائمة توريد، أو احتياج مكتبة ومشروع مؤسسي.</p></div>
 		<div class="da-contact-service-grid">
 			<article data-reveal><span><?php doralashab_icon( 'pen' ); ?></span><h3>مشروع نشر</h3><p>مخطوط أو محتوى يحتاج إلى تقييم وإنتاج ونشر وتوزيع.</p><a href="mailto:alas3hab@gmail.com?subject=مشروع%20نشر">ناقش مشروع النشر <?php doralashab_icon( 'arrow' ); ?></a></article>
 			<article data-reveal><span><?php doralashab_icon( 'boxes' ); ?></span><h3>توريد كتب</h3><p>قائمة مصادر أو احتياج مؤسسي لكتب عربية أو أجنبية.</p><a href="mailto:alas3hab@gmail.com?subject=طلب%20توريد%20كتب">ناقش طلب التوريد <?php doralashab_icon( 'arrow' ); ?></a></article>

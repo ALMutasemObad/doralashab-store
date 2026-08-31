@@ -66,9 +66,9 @@ $presence = array(
 <section class="da-seasonal-hero" aria-labelledby="home-hero-title">
 	<div class="da-container da-seasonal-hero-grid">
 		<div class="da-seasonal-hero-copy" data-reveal>
+			<h1 id="home-hero-title"><span>في موسم الوطن…</span><span>نهيّئ للمعرفة مكانها</span></h1>
 			<p class="da-seasonal-eyebrow"><span>اليوم الوطني السعودي</span><i aria-hidden="true"></i><span>العودة إلى المدارس</span></p>
 			<p class="da-seasonal-brandline">شركة دور الأصحاب للنشر والتوزيع | نشر وتوزيع وحلول مؤسسية للمعرفة</p>
-			<h1 id="home-hero-title"><span>في موسم الوطن…</span><span>نهيّئ للمعرفة مكانها</span></h1>
 			<p>نجهّز مكتبات المدارس من قائمة الكتب حتى ترتيب الرفوف، ونقدّم للأسر اشتراكًا قصصيًا متجددًا يجعل القراءة موعدًا ينتظره الطفل.</p>
 			<div class="da-hero-actions">
 				<a class="da-button da-button--gold" href="#school-library-offer">جهّز مكتبة مدرستك <?php doralashab_icon( 'arrow' ); ?></a>
@@ -99,8 +99,8 @@ $presence = array(
 <section class="da-section da-seasonal-offers" id="seasonal-offers" aria-labelledby="seasonal-offers-title">
 	<div class="da-container">
 		<div class="da-section-heading da-section-heading--center" data-reveal>
-			<p class="da-kicker">عروض الموسم</p>
 			<h2 id="seasonal-offers-title">مساران… وغاية واحدة: أن يصبح الكتاب جزءًا من كل يوم</h2>
+			<p class="da-kicker">عروض الموسم</p>
 			<p>حل مؤسسي للمدرسة، وتجربة قراءة متجددة للأسرة؛ بصياغة عملية تبدأ بالاختيار وتنتهي بأثر يمكن رؤيته.</p>
 		</div>
 
@@ -110,8 +110,8 @@ $presence = array(
 				<span>عرض اليوم الوطني للمدارس</span>
 			</div>
 			<div class="da-seasonal-offer-copy">
-				<p class="da-offer-audience">للمدارس والجهات التعليمية</p>
 				<h3>مكتبة تُبنى على احتياجكم، وتُسلَّم جاهزة للقراءة</h3>
+				<p class="da-offer-audience">للمدارس والجهات التعليمية</p>
 				<p class="da-offer-lead">نضع بين أيديكم ملفًا واضحًا لقوائم الكتب. تختار المدرسة العناوين والكميات، ثم نتولى التوريد والتجهيز الفني وفق نطاق العمل المعتمد.</p>
 				<div class="da-offer-flow" aria-label="خطوات طلب مكتبة مدرسية">
 					<span><b>01</b><strong>حمّلوا القائمة</strong><small>ملف Excel منظم وسهل التعبئة</small></span>
@@ -138,8 +138,8 @@ $presence = array(
 				<span>عرض العودة إلى المدارس للأسر</span>
 			</div>
 			<div class="da-seasonal-offer-copy">
-				<p class="da-offer-audience">لأولياء الأمور</p>
 				<h3>اشتراكٌ يجعل للقراءة موعدًا ينتظره طفلكم</h3>
+				<p class="da-offer-audience">لأولياء الأمور</p>
 				<p class="da-offer-lead">قصص تُختار بما يلائم عمر الطفل واهتماماته، وتصل إلى المنزل بصورة دورية؛ لتتجدد مكتبته، وتتسع لغته وخياله، وتتحول القراءة إلى عادة محببة.</p>
 				<div class="da-story-pillars">
 					<span><?php doralashab_icon( 'target' ); ?><strong>اختيار ملائم</strong><small>بحسب العمر والاهتمامات</small></span>
@@ -159,8 +159,8 @@ $presence = array(
 <section class="da-section da-snapshot-section" id="about">
 	<div class="da-container da-snapshot-grid">
 		<div class="da-snapshot-copy" data-reveal>
-			<p class="da-kicker">الشركة في لمحة</p>
 			<h2>مسيرة سعودية<br><span>في خدمة المعرفة</span></h2>
+			<p class="da-kicker">الشركة في لمحة</p>
 			<p class="da-lead">بدأت شركة دور الأصحاب مسيرتها عام 1423هـ، وتطورت من دار للنشر والتوزيع إلى منظومة حلول معرفية تربط صناعة المحتوى بتوريد المصادر وتجهيز المكتبات.</p>
 			<a class="da-text-link" href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>">اكتشف قصة الشركة <?php doralashab_icon( 'arrow' ); ?></a>
 		</div>
@@ -178,8 +178,8 @@ $presence = array(
 <section class="da-section da-section--white da-sector-section" aria-labelledby="sectors-title">
 	<div class="da-container">
 		<div class="da-section-heading da-section-heading--center" data-reveal>
-			<p class="da-kicker">القطاعات التي نخدمها</p>
 			<h2 id="sectors-title">حلول تتكيّف مع طبيعة كل جهة</h2>
+			<p class="da-kicker">القطاعات التي نخدمها</p>
 			<p>نبني الخدمة وفق سياق الجهة وطبيعة مستفيديها ونطاق المشروع، لا وفق قالب واحد للجميع.</p>
 		</div>
 		<div class="da-sector-cards">
@@ -198,7 +198,7 @@ $presence = array(
 <section class="da-section da-capabilities-section" id="services" aria-labelledby="services-title">
 	<div class="da-container">
 		<div class="da-capabilities-heading" data-reveal>
-			<div><p class="da-kicker da-kicker--light">منظومة مترابطة</p><h2 id="services-title"><span>تخدم الكتاب،</span><span>وتفهم المؤسسة.</span></h2></div>
+			<div><h2 id="services-title"><span>تخدم الكتاب،</span><span>وتفهم المؤسسة.</span></h2><p class="da-kicker da-kicker--light">منظومة مترابطة</p></div>
 			<p>نغطي دورة المعرفة من الفكرة والإنتاج إلى التوريد والتجهيز والتشغيل، وفق نطاق يناسب طبيعة كل مشروع.</p>
 		</div>
 		<div class="da-capability-grid">
@@ -218,7 +218,7 @@ $presence = array(
 	<section class="da-section da-books-section" aria-labelledby="books-title">
 		<div class="da-container">
 			<div class="da-section-heading" data-reveal>
-				<div><p class="da-kicker">مختارات من المتجر</p><h2 id="books-title">إصدارات لقارئ يبحث عن قيمة</h2></div>
+				<div><h2 id="books-title">إصدارات لقارئ يبحث عن قيمة</h2><p class="da-kicker">مختارات من المتجر</p></div>
 				<div class="da-section-side"><p>كتب في الأدب والمعرفة والإدارة والتعليم ومجالات متنوعة، ضمن تجربة تصفح واضحة وسهلة.</p><a class="da-text-link" href="<?php echo esc_url( $shop_url ); ?>">مشاهدة كل الكتب <?php doralashab_icon( 'arrow' ); ?></a></div>
 			</div>
 			<div class="da-products-grid" data-reveal>
@@ -231,7 +231,7 @@ $presence = array(
 <section class="da-section da-method-section" aria-labelledby="method-title">
 	<div class="da-container">
 		<div class="da-section-heading" data-reveal>
-			<div><p class="da-kicker">منهج عمل واضح</p><h2 id="method-title" class="da-balanced-title"><span>من الاحتياج إلى التسليم…</span><span>بلا مناطق رمادية</span></h2></div>
+			<div><h2 id="method-title" class="da-balanced-title"><span>من الاحتياج إلى التسليم…</span><span>بلا مناطق رمادية</span></h2><p class="da-kicker">منهج عمل واضح</p></div>
 			<p>منهج مرحلي يوضح الأعمال والمخرجات والمسؤوليات، ويجعل الفحص والاستلام جزءاً من التنفيذ.</p>
 		</div>
 		<div class="da-method-grid" data-reveal>
@@ -240,7 +240,7 @@ $presence = array(
 			<?php endforeach; ?>
 		</div>
 		<div class="da-deliverables" data-reveal>
-			<div class="da-deliverables-copy"><p class="da-kicker da-kicker--light">مخرجات قابلة للمراجعة والاستلام</p><h3>ما الذي تستلمه الجهة؟</h3><p>تتحدد المخرجات بحسب طبيعة المشروع ونطاقه، وقد تشمل:</p></div>
+			<div class="da-deliverables-copy"><h3>ما الذي تستلمه الجهة؟</h3><p class="da-kicker da-kicker--light">مخرجات قابلة للمراجعة والاستلام</p><p>تتحدد المخرجات بحسب طبيعة المشروع ونطاقه، وقد تشمل:</p></div>
 			<div class="da-deliverables-grid">
 				<?php foreach ( $deliverables as $item ) : ?><span><?php doralashab_icon( $item[0] ); ?><strong><?php echo esc_html( $item[1] ); ?></strong></span><?php endforeach; ?>
 			</div>
@@ -251,8 +251,8 @@ $presence = array(
 <section class="da-section da-presence-section" id="institutional-presence" aria-labelledby="presence-title">
 	<div class="da-container">
 		<div class="da-section-heading da-section-heading--center" data-reveal>
-			<p class="da-kicker">حضور مؤسسي ومعرفي</p>
 			<h2 id="presence-title">محطات في التعليم والثقافة والجودة</h2>
+			<p class="da-kicker">حضور مؤسسي ومعرفي</p>
 			<p>نماذج تعكس امتداد حضور الدار في سوق الكتاب والمعرفة، مع اختلاف طبيعة الحضور والتعاون من جهة إلى أخرى.</p>
 		</div>
 		<div class="da-presence-grid" data-reveal>
@@ -266,7 +266,7 @@ $presence = array(
 		</div>
 		<div class="da-fairs-band" data-reveal>
 			<span class="da-fairs-icon"><?php doralashab_icon( 'globe' ); ?></span>
-			<div><p class="da-kicker da-kicker--light">حضور معرفي ممتد</p><h3>مشاركة في معارض الكتاب الدولية</h3><p>حضور يعزز وصول الإصدارات، ويوسع قنوات التوزيع والتواصل مع الناشرين والقراء.</p></div>
+			<div><h3>مشاركة في معارض الكتاب الدولية</h3><p class="da-kicker da-kicker--light">حضور معرفي ممتد</p><p>حضور يعزز وصول الإصدارات، ويوسع قنوات التوزيع والتواصل مع الناشرين والقراء.</p></div>
 		</div>
 	</div>
 </section>
@@ -275,8 +275,8 @@ $presence = array(
 	<div class="da-founder-image" aria-hidden="true"></div>
 	<div class="da-container da-founder-preview-inner">
 		<div class="da-founder-copy" data-reveal>
-			<p class="da-kicker da-kicker--light">المؤسس</p>
 			<h2 id="founder-title">خبرة تقود<br>رؤية الدار</h2>
+			<p class="da-kicker da-kicker--light">المؤسس</p>
 			<p>يقود الأستاذ عبدالرحمن بن سعد العوين مسيرة تتجاوز 23 عاماً في سوق النشر والتوزيع، مع تركيز على صناعة الكتاب ووصوله إلى القارئ والمؤسسة.</p>
 			<p>وترتكز رؤيته على فهم احتياجات قطاع المعرفة في المملكة، وربط جودة المحتوى بانضباط التنفيذ واستدامة الأثر.</p>
 			<a class="da-button da-button--light" href="<?php echo esc_url( home_url( '/about-us/#founder' ) ); ?>">تعرّف إلى مسيرة المؤسس <?php doralashab_icon( 'arrow' ); ?></a>
