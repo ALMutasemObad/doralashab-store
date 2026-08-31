@@ -7,6 +7,8 @@
 	--da-font-heading: 26px;
 	--da-font-body: 16px;
 	--da-section-space: clamp(2.5rem, 4vw, 3.5rem);
+	--da-book-cover-width: 192px;
+	--da-book-cover-ratio: 3 / 4;
 	--da-green: #006c35;
 	--da-green-dark: #064b35;
 	--da-green-deep: #033426;
@@ -706,9 +708,11 @@ select:focus-visible {
 	box-shadow: 0 10px 32px rgba(22, 54, 42, .055);
 }
 .da-product-card:hover { transform: translateY(-5px); border-color: rgba(0, 108, 53, .2); box-shadow: var(--da-shadow-hover); }
-.da-product-card-image { display: grid; aspect-ratio: 4 / 3; place-items: center; padding: .75rem; background: #eeeee9; }
-.da-product-card-image img { width: 100%; height: 100%; object-fit: contain; object-position: center; filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .12)); }
-.da-product-card-body { min-height: 0; gap: .5rem; padding: 1rem; }
+/* The portrait image sets the media height; the flex card must never crop it. */
+.da-product-card-image { display: grid; width: 100%; height: auto; min-height: 0; flex: 0 0 auto; aspect-ratio: auto; place-items: center; padding: .75rem; background: #eeeee9; }
+.da-product-card-image img { display: block; width: min(100%, var(--da-book-cover-width)); height: auto; aspect-ratio: var(--da-book-cover-ratio); object-fit: contain; object-position: center; filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .12)); }
+.da-product-card:hover .da-product-card-image img { transform: none; }
+.da-product-card-body { min-height: 0; height: auto; gap: .5rem; padding: 1rem; }
 .da-product-meta { overflow: hidden; color: var(--da-green); font-size: var(--da-font-body); line-height: 1.5; text-overflow: ellipsis; white-space: nowrap; }
 .da-product-card h3 {
 	display: -webkit-box;
