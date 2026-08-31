@@ -4,6 +4,7 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<meta name="theme-color" content="#006c35">
+	<meta name="google-site-verification" content="gAbYoshA8DygFCq5u9mUhyW9IAwtMgChbg44PeQj-4A" />
 	<?php wp_head(); ?>
 	<link rel="icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/favicon.svg' ); ?>" type="image/svg+xml">
 </head>
