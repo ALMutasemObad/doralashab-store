@@ -33,12 +33,12 @@ $services = array(
 );
 
 $workflow = array(
-	array( '01', 'نفهم الاحتياج', 'أهداف الجهة وطبيعة المستفيدين وسياق المشروع.' ),
-	array( '02', 'نحدد النطاق', 'الأعمال والمخرجات والمسؤوليات ومعايير القبول.' ),
-	array( '03', 'نبني الخطة', 'مسار التنفيذ والتوريد والمراجعة والاعتماد.' ),
-	array( '04', 'ننفذ ونراجع', 'تنفيذ منظم والتحقق من المطابقة وجودة المخرجات.' ),
-	array( '05', 'نوثق التقدم', 'كشوف وملاحظات وقرارات تحفظ وضوح المشروع.' ),
-	array( '06', 'نسلم ونتابع', 'فحص واستلام وتوصيات تدعم التشغيل والمتابعة.' ),
+	array( 'نفهم الاحتياج', 'أهداف الجهة وطبيعة المستفيدين وسياق المشروع.' ),
+	array( 'نحدد النطاق', 'الأعمال والمخرجات والمسؤوليات ومعايير القبول.' ),
+	array( 'نبني الخطة', 'مسار التنفيذ والتوريد والمراجعة والاعتماد.' ),
+	array( 'ننفذ ونراجع', 'تنفيذ منظم والتحقق من المطابقة وجودة المخرجات.' ),
+	array( 'نوثق التقدم', 'كشوف وملاحظات وقرارات تحفظ وضوح المشروع.' ),
+	array( 'نسلم ونتابع', 'فحص واستلام وتوصيات تدعم التشغيل والمتابعة.' ),
 );
 
 $deliverables = array(
@@ -234,9 +234,9 @@ $presence = array(
 			<div><h2 id="method-title" class="da-balanced-title"><span>من الاحتياج إلى التسليم…</span><span>بلا مناطق رمادية</span></h2><p class="da-kicker">منهج عمل واضح</p></div>
 			<p>منهج مرحلي يوضح الأعمال والمخرجات والمسؤوليات، ويجعل الفحص والاستلام جزءاً من التنفيذ.</p>
 		</div>
-		<div class="da-method-grid" data-reveal>
+		<div class="da-method-grid da-method-grid--centered" data-reveal>
 			<?php foreach ( $workflow as $step ) : ?>
-				<article><span><?php echo esc_html( $step[0] ); ?></span><h3><?php echo esc_html( $step[1] ); ?></h3><p><?php echo esc_html( $step[2] ); ?></p></article>
+				<article><h3><?php echo esc_html( $step[0] ); ?></h3><p><?php echo esc_html( $step[1] ); ?></p></article>
 			<?php endforeach; ?>
 		</div>
 		<div class="da-deliverables" data-reveal>
