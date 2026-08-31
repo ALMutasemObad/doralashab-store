@@ -211,3 +211,27 @@ function doralashab_apply_verified_catalog_refresh(): void {
 	}
 }
 add_action( 'init', 'doralashab_apply_verified_catalog_refresh', 99 );
+
+/**
+ * Temporary read-only diagnostic used to verify the one-time import. Removed
+ * with this file once the catalog has been checked publicly.
+ */
+function doralashab_catalog_import_diagnostic(): void {
+	register_rest_route(
+		'doralashab/v1',
+		'/catalog-import-status',
+		array(
+			'methods'             => 'GET',
+			'permission_callback' => '__return_true',
+			'callback'            => static function (): WP_REST_Response {
+				return new WP_REST_Response(
+					array(
+						'completed' => DORALASHAB_CATALOG_IMPORT_VERSION === get_option( 'doralashab_catalog_import_version' ),
+						'error'     => (string) get_option( 'doralashab_catalog_import_error', '' ),
+					)
+				);
+			},
+		)
+	);
+}
+add_action( 'rest_api_init', 'doralashab_catalog_import_diagnostic' );
