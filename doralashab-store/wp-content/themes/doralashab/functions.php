@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-const DORALASHAB_THEME_VERSION = '3.2.1';
+const DORALASHAB_THEME_VERSION = '3.2.2';
 
 function doralashab_setup(): void {
 	load_theme_textdomain( 'doralashab', get_template_directory() . '/languages' );

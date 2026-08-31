@@ -66,7 +66,7 @@ $presence = array(
 <section class="da-seasonal-hero" aria-labelledby="home-hero-title">
 	<div class="da-container da-seasonal-hero-grid">
 		<div class="da-seasonal-hero-copy" data-reveal>
-			<h1 id="home-hero-title"><span>في موسم الوطن…</span><span>نهيّئ للمعرفة مكانها</span></h1>
+			<h1 id="home-hero-title"><span>في موسم الوطن…</span> <span>نهيّئ للمعرفة مكانها</span></h1>
 			<p class="da-seasonal-eyebrow"><span>اليوم الوطني السعودي</span><i aria-hidden="true"></i><span>العودة إلى المدارس</span></p>
 			<p class="da-seasonal-brandline">شركة دور الأصحاب للنشر والتوزيع | نشر وتوزيع وحلول مؤسسية للمعرفة</p>
 			<p>نجهّز مكتبات المدارس من قائمة الكتب حتى ترتيب الرفوف، ونقدّم للأسر اشتراكًا قصصيًا متجددًا يجعل القراءة موعدًا ينتظره الطفل.</p>
@@ -114,9 +114,9 @@ $presence = array(
 				<p class="da-offer-audience">للمدارس والجهات التعليمية</p>
 				<p class="da-offer-lead">نضع بين أيديكم ملفًا واضحًا لقوائم الكتب. تختار المدرسة العناوين والكميات، ثم نتولى التوريد والتجهيز الفني وفق نطاق العمل المعتمد.</p>
 				<div class="da-offer-flow" aria-label="خطوات طلب مكتبة مدرسية">
-					<span><b>01</b><strong>حمّلوا القائمة</strong><small>ملف Excel منظم وسهل التعبئة</small></span>
-					<span><b>02</b><strong>حدّدوا الاختيار</strong><small>العناوين والكميات والخدمات</small></span>
-					<span><b>03</b><strong>استلموا مكتبتكم</strong><small>توريد وتجهيز وترتيب وفق الاتفاق</small></span>
+					<span><strong>حمّلوا القائمة</strong><small>ملف Excel منظم وسهل التعبئة</small></span>
+					<span><strong>حدّدوا الاختيار</strong><small>العناوين والكميات والخدمات</small></span>
+					<span><strong>استلموا مكتبتكم</strong><small>توريد وتجهيز وترتيب وفق الاتفاق</small></span>
 				</div>
 				<ul class="da-offer-services">
 					<li><?php doralashab_icon( 'check' ); ?> توريد الكتب المختارة</li>
@@ -183,9 +183,8 @@ $presence = array(
 			<p>نبني الخدمة وفق سياق الجهة وطبيعة مستفيديها ونطاق المشروع، لا وفق قالب واحد للجميع.</p>
 		</div>
 		<div class="da-sector-cards">
-			<?php foreach ( $sectors as $index => $sector ) : ?>
+			<?php foreach ( $sectors as $sector ) : ?>
 				<article class="da-sector-card" data-reveal>
-					<span class="da-sector-order"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
 					<span class="da-sector-icon"><?php doralashab_icon( $sector[0] ); ?></span>
 					<h3><?php echo esc_html( $sector[1] ); ?></h3>
 					<p><?php echo esc_html( $sector[2] ); ?></p>
@@ -202,9 +201,9 @@ $presence = array(
 			<p>نغطي دورة المعرفة من الفكرة والإنتاج إلى التوريد والتجهيز والتشغيل، وفق نطاق يناسب طبيعة كل مشروع.</p>
 		</div>
 		<div class="da-capability-grid">
-			<?php foreach ( $services as $index => $service ) : ?>
+			<?php foreach ( $services as $service ) : ?>
 				<a class="da-capability-card" href="<?php echo esc_url( $service[3] ); ?>" data-reveal>
-					<span class="da-capability-top"><i><?php doralashab_icon( $service[0] ); ?></i><small><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></small></span>
+					<span class="da-capability-top"><i><?php doralashab_icon( $service[0] ); ?></i></span>
 					<h3><?php echo esc_html( $service[1] ); ?></h3>
 					<p><?php echo esc_html( $service[2] ); ?></p>
 					<span class="da-card-arrow" aria-hidden="true"><?php doralashab_icon( 'arrow' ); ?></span>
