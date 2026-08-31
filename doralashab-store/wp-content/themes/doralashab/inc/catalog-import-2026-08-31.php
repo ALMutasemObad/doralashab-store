@@ -210,4 +210,4 @@ function doralashab_apply_verified_catalog_refresh(): void {
 		delete_transient( 'doralashab_catalog_import_lock' );
 	}
 }
-add_action( 'wp_loaded', 'doralashab_apply_verified_catalog_refresh', 20 );
+add_action( 'init', 'doralashab_apply_verified_catalog_refresh', 99 );
