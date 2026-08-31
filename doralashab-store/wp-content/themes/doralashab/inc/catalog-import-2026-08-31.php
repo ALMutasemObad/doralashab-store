@@ -25,6 +25,11 @@ function doralashab_catalog_import_csv( string $filename ): array {
 		throw new RuntimeException( 'Catalog import file cannot be opened: ' . $filename );
 	}
 
+	$utf8_bom = fread( $handle, 3 );
+	if ( "\xEF\xBB\xBF" !== $utf8_bom ) {
+		rewind( $handle );
+	}
+
 	$headers = fgetcsv( $handle );
 	if ( false === $headers ) {
 		fclose( $handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
@@ -32,7 +37,6 @@ function doralashab_catalog_import_csv( string $filename ): array {
 	}
 
 	$headers = array_map( static fn( $header ) => trim( (string) $header ), $headers );
-	$headers[0] = ltrim( $headers[0], "\xEF\xBB\xBF" );
 	$rows    = array();
 	while ( false !== ( $values = fgetcsv( $handle ) ) ) {
 		if ( count( $values ) < count( $headers ) ) {
