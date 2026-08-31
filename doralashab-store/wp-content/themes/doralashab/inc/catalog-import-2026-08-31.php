@@ -32,6 +32,7 @@ function doralashab_catalog_import_csv( string $filename ): array {
 	}
 
 	$headers = array_map( static fn( $header ) => trim( (string) $header ), $headers );
+	$headers[0] = ltrim( $headers[0], "\xEF\xBB\xBF" );
 	$rows    = array();
 	while ( false !== ( $values = fgetcsv( $handle ) ) ) {
 		if ( count( $values ) < count( $headers ) ) {
